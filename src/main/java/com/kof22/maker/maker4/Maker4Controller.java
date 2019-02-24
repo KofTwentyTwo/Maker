@@ -1,6 +1,7 @@
 package com.kof22.maker.maker4;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,4 +12,5 @@ public class Maker4Controller
    {
       return "index";
    }
+
 }

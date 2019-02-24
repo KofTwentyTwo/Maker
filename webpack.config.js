@@ -17,7 +17,10 @@ module.exports = {
    },
 
    devServer: {
-      contentBase: path.join(__dirname,'src/main/react/')
+      contentBase: path.join(__dirname,'src/main/react/'),
+      proxy:{
+         '/api' : 'http://localhost:8080'
+      }
    },
 
    module: {
@@ -46,8 +49,9 @@ module.exports = {
    },
 
    plugins: [
-      new HtmlWebpackPlugin({
-         template: path.join(__dirname,'src/main/react/','index.html')
-      })
+      /////////////////////////////////////////////////////////////////////////////////
+      // This is being taken care of by the Spring Boot index.html file in templates //
+      /////////////////////////////////////////////////////////////////////////////////
+      new HtmlWebpackPlugin({ template: path.join(__dirname,'src/main/react/','index.html') })
    ]
 };

@@ -13,7 +13,7 @@ import cardImagesStyles from "assets/jss/material-dashboard-pro-react/cardImages
 import {events} from "variables/general.jsx";
 
 
-const API = 'http://localhost:8080/api/projects/';
+const API = 'http://localhost:8081/api/projects/';
 const DEFAULT_QUERY = '';
 
 class Mproject extends React.Component
