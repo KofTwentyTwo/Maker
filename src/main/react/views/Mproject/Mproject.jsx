@@ -13,13 +13,11 @@ import cardImagesStyles from "assets/jss/material-dashboard-pro-react/cardImages
 import {events} from "variables/general.jsx";
 
 
-const API = 'http://localhost:8081/api/projects/';
+const API = '/api/projects/';
 const DEFAULT_QUERY = '';
 
 class Mproject extends React.Component
 {
-
-
    constructor(props)
    {
       super(props);
@@ -110,8 +108,8 @@ class Mproject extends React.Component
       this.state.projects.forEach(function (project)
       {
          cards.push(
-            <GridItem justify="center" xs={6} sm={3}>
-               <Card key={project.id} style={{width: "20rem"}}>
+            <GridItem key={project.name} xs={6} sm={3}>
+               <Card style={{width: "20rem"}}>
                   <img
                      className={classes.cardImgTop}
                      data-src="holder.js/100px180/"
@@ -144,11 +142,11 @@ class Mproject extends React.Component
             textAlign="center"
             title="Makers 4 - Projects"
             category={
-               <span> A listing of all of the projects currently known by the backend... </span>
+               <span> A listing of all of your projects currently created and active... </span>
             }
          />
          {this.state.alert}
-         <GridContainer justify="center">
+         <GridContainer key="gc1" justify="center">
             {this.createProjectCardsFull(classes)}
          </GridContainer>
       </div>;

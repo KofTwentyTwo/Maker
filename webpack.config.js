@@ -18,6 +18,7 @@ module.exports = {
 
    devServer: {
       contentBase: path.join(__dirname,'src/main/react/'),
+      port: 8081,
       proxy:{
          '/api' : 'http://localhost:8080'
       }
