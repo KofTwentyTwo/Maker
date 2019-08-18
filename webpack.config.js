@@ -1,58 +1,45 @@
-import path from 'path';
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
-   entry: './src/main/react/app.js',
-   output: {
-      path: path.join(__dirname,'src/main/resources/public/'),
-      filename: 'bundle.js'
+   entry: './src/main/react/index.jsx',
+
+   devServer: 
+   {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      port: 9001,
+      open: true,
+      liveReload: true 
    },
 
-   mode: process.env.NODE_ENV || 'development',
-
-   resolve: {
-      modules: [path.resolve(__dirname, 'src/main/react/'), 'node_modules'],
-      extensions: ['.js', '.jsx']
-   },
-
-   devServer: {
-      contentBase: path.join(__dirname,'src/main/react/'),
-      port: 8081,
-      proxy:{
-         '/api' : 'http://localhost:8080'
-      }
-   },
-
-   module: {
+   module : {
       rules: [
          {
-            // this is so that we can compile any React,
-            // ES6 and above into normal ES5 syntax
-            test: /\.(js|jsx)$/,
-            // we do not want anything from node_modules to be compiled
+            test   : /\.(js|jsx)$/,
             exclude: /node_modules/,
-            use: ['babel-loader']
+            use    : {
+               loader: "babel-loader"
+            }
          },
          {
-            test: /\.(css|scss)$/,
-            use: [
-               "style-loader", // creates style nodes from JS strings
-               "css-loader", // translates CSS into CommonJS
-               "sass-loader" // compiles Sass to CSS, using Node Sass by default
+            test: /\.html$/,
+            use : [
+               {
+                  loader: "html-loader"
+               }
             ]
-         },
-         {
-            test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
-            loaders: ['file-loader']
          }
       ]
    },
-
-   plugins: [
-      /////////////////////////////////////////////////////////////////////////////////
-      // This is being taken care of by the Spring Boot index.html file in templates //
-      /////////////////////////////////////////////////////////////////////////////////
-      new HtmlWebpackPlugin({ template: path.join(__dirname,'src/main/react/','index.html') })
+   plugins: 
+   [
+      new HtmlWebPackPlugin(
+      {
+         template: "./src/main/react/templates/index.html",
+         filename: "./index.html"
+      })
    ]
 };
+
