@@ -133,3 +133,76 @@ above `yarn start-dev`) and also defines the few parameters which can not be def
 #### The Back-End 
 The backend of the server is a Java Spring application which provides a series of RestAPI endpoints for the front-end of the 
 application to interact with.  The manual build environment for the backend is a provided by Maven. 
+
+The simple command to build and run the backend via SpringBoot is `mvn clean spring-boot:run`.  The output should look like this 
+
+        [INFO] 
+        [INFO] -----------------------< com.kof22.maker:maker4 >-----------------------
+        [INFO] Building maker4 0.0.1-SNAPSHOT
+        [INFO] --------------------------------[ jar ]---------------------------------
+        [INFO] 
+        [INFO] >>> spring-boot-maven-plugin:2.1.3.RELEASE:run (default-cli) > test-compile @ maker4 >>>
+        [INFO] 
+        [INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ maker4 ---
+        [INFO] Using 'UTF-8' encoding to copy filtered resources.
+        [INFO] Copying 1 resource
+        [INFO] Copying 0 resource
+        [INFO] 
+        [INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ maker4 ---
+        [INFO] Nothing to compile - all classes are up to date
+        [INFO] 
+        [INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ maker4 ---
+        [INFO] Using 'UTF-8' encoding to copy filtered resources.
+        [INFO] skip non existing resourceDirectory /Users/jmaes/Projects/LocalWIP/Code/Maker/src/test/resources
+        [INFO] 
+        [INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ maker4 ---
+        [INFO] Nothing to compile - all classes are up to date
+        [INFO] 
+        [INFO] <<< spring-boot-maven-plugin:2.1.3.RELEASE:run (default-cli) < test-compile @ maker4 <<<
+        [INFO] 
+        [INFO] 
+        [INFO] --- spring-boot-maven-plugin:2.1.3.RELEASE:run (default-cli) @ maker4 ---
+        [INFO] Attaching agents: []
+        
+          .   ____          _            __ _ _
+         /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+        ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+         \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+          '  |____| .__|_| |_|_| |_\__, | / / / /
+         =========|_|==============|___/=/_/_/_/
+         :: Spring Boot ::        (v2.1.3.RELEASE)
+        
+        2019-08-18 19:02:21.770  INFO 121 --- [  restartedMain] c.kof22.maker.maker4.Maker4Application   : Starting Maker4Application on jm-imp-2018-wifi.908statest.com with PID 121 (/Users/jmaes/Projects/LocalWIP/Code/Maker/target/classes started by jmaes in /Users/jmaes/Projects/LocalWIP/Code/Maker)
+        2019-08-18 19:02:21.773  INFO 121 --- [  restartedMain] c.kof22.maker.maker4.Maker4Application   : No active profile set, falling back to default profiles: default
+        2019-08-18 19:02:21.812  INFO 121 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+        2019-08-18 19:02:21.812  INFO 121 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+        2019-08-18 19:02:22.435  INFO 121 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+        2019-08-18 19:02:22.492  INFO 121 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51ms. Found 6 repository interfaces.
+        2019-08-18 19:02:22.872  INFO 121 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ac3d30c5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+        2019-08-18 19:02:22.892  INFO 121 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.hateoas.config.HateoasConfiguration' of type [org.springframework.hateoas.config.HateoasConfiguration$$EnhancerBySpringCGLIB$$2bbd7df7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+        2019-08-18 19:02:23.273  INFO 121 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+        2019-08-18 19:02:23.302  INFO 121 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+        2019-08-18 19:02:23.302  INFO 121 --- [  restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+        2019-08-18 19:02:23.315  INFO 121 --- [  restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/jmaes/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+        2019-08-18 19:02:23.409  INFO 121 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+        2019-08-18 19:02:23.410  INFO 121 --- [  restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1597 ms
+        2019-08-18 19:02:23.632  INFO 121 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+        2019-08-18 19:02:23.973  INFO 121 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+        2019-08-18 19:02:24.039  INFO 121 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+        	name: default
+        	...]
+        2019-08-18 19:02:24.128  INFO 121 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+        2019-08-18 19:02:24.129  INFO 121 --- [  restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+        2019-08-18 19:02:24.313  INFO 121 --- [  restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+        2019-08-18 19:02:24.441  INFO 121 --- [  restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+        2019-08-18 19:02:25.555  INFO 121 --- [  restartedMain] o.h.t.schema.internal.SchemaCreatorImpl  : HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@38d0b4a5'
+        2019-08-18 19:02:25.557  INFO 121 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+        2019-08-18 19:02:25.579  INFO 121 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+        2019-08-18 19:02:26.358  INFO 121 --- [  restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+        2019-08-18 19:02:26.414  WARN 121 --- [  restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+        2019-08-18 19:02:26.560  WARN 121 --- [  restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+        2019-08-18 19:02:26.921  INFO 121 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+        2019-08-18 19:02:26.927  INFO 121 --- [  restartedMain] c.kof22.maker.maker4.Maker4Application   : Started Maker4Application in 5.418 seconds (JVM running for 5.817)
+
+
+

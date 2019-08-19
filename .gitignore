@@ -1,15 +1,14 @@
-HELP.md
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+backend/target/
+backend/!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -17,13 +16,17 @@ HELP.md
 *.iml
 *.ipr
 
-## node ##
-/node_modules/
+frontend/.idea
+frontend/*.iws
+frontend/*.iml
+frontend/*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+
+## node ##
+frontend/node_modules/**.*
+frontend/node_modules/
+
