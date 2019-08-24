@@ -1,8 +1,8 @@
 package com.kof22.maker.maker4.utils;
 
 import com.kof22.maker.maker4.cabinets.*;
-import com.kof22.maker.maker4.core.accounts.Account;
-import com.kof22.maker.maker4.core.accounts.AccountRepository;
+import com.kof22.maker.maker4.core.security.*;
+import com.kof22.maker.maker4.core.accounts.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,9 +17,10 @@ public class DatabaseLoader implements CommandLineRunner
    private final ProjectGroupRepository projectGroupRepository;
    private final MaterialRepository materialRepository;
    private final CabinetRepository cabinetRepository;
+   private final TokenRepository tokenRepository;
 
    @Autowired
-   public DatabaseLoader(MaterialTypeRepository materialTypeRepository, AccountRepository accountRepository, ProjectRepository projectRepository, ProjectGroupRepository projectGroupRepository, MaterialRepository materialRepository, CabinetRepository cabinetRepository)
+   public DatabaseLoader(MaterialTypeRepository materialTypeRepository, AccountRepository accountRepository, ProjectRepository projectRepository, ProjectGroupRepository projectGroupRepository, MaterialRepository materialRepository, CabinetRepository cabinetRepository, TokenRepository tokenRepository)
    {
       this.materialTypeRepository = materialTypeRepository;
       this.accountRepository = accountRepository;
@@ -27,6 +28,7 @@ public class DatabaseLoader implements CommandLineRunner
       this.projectGroupRepository = projectGroupRepository;
       this.materialRepository = materialRepository;
       this.cabinetRepository = cabinetRepository;
+      this.tokenRepository = tokenRepository;
    }
 
    @Override
@@ -36,6 +38,7 @@ public class DatabaseLoader implements CommandLineRunner
       // Build some Accounts //
       /////////////////////////
       Account account = this.accountRepository.save(new Account("James Maes", "james@kof22.com"));
+      Token token = this.tokenRepository.save(new Token("YYYYYYYYY", account, Boolean.FALSE));
 
       //////////////////////////////////////////
       // Build some Projects for this account //
