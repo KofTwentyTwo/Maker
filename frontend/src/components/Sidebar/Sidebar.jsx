@@ -78,6 +78,8 @@ class Sidebar extends React.Component
    }
 
    mainPanel = React.createRef();
+
+
    // this creates the intial state of this component based on the collapse routes
    // that it gets through this.props.routes
    getCollapseStates = routes =>
@@ -97,6 +99,8 @@ class Sidebar extends React.Component
       });
       return initialState;
    };
+
+
    // this verifies if any of the collapses should be default opened on a rerender of this component
    // for example, on the refresh of the page,
    // while on the src/views/forms/RegularForms.jsx - route /admin/regular-forms
@@ -116,11 +120,13 @@ class Sidebar extends React.Component
       return false;
    }
 
+
    // verifies if routeName is the one active (in browser input)
    activeRoute = routeName =>
    {
       return window.location.href.indexOf(routeName) > -1 ? "active" : "";
    };
+
 
    openCollapse(collapse)
    {
@@ -128,6 +134,7 @@ class Sidebar extends React.Component
       st[collapse] = !this.state[collapse];
       this.setState(st);
    }
+
 
    // this function creates the links and collapses that appear in the sidebar (left menu)
    createLinks = routes =>
@@ -327,6 +334,7 @@ class Sidebar extends React.Component
       });
    };
 
+
    render()
    {
       const {
@@ -394,7 +402,7 @@ class Sidebar extends React.Component
                            onClick={() => this.openCollapse("openAvatar")}
                      >
                         <ListItemText
-                              primary=
+                              primary="Still No Clue..."
                               secondary={
                                  <b
                                        className={
@@ -500,15 +508,17 @@ class Sidebar extends React.Component
       var brand = (
             <div className={logoClasses}>
                <a
-                     href="https://www.creative-tim.com?ref=mdpr-sidebar"
+                     href="https://www.makers4.com"
                      target="_blank"
+                     rel="noopener noreferrer"
                      className={logoMini}
                >
                   <img src={logo} alt="logo" className={classes.img}/>
                </a>
                <a
-                     href="https://www.creative-tim.com?ref=mdpr-sidebar"
+                     href="https://www.makers4.com"
                      target="_blank"
+                     rel="noopener noreferrer"
                      className={logoNormal}
                >
                   {logoText}
@@ -592,9 +602,11 @@ class Sidebar extends React.Component
    }
 }
 
+
 Sidebar.defaultProps = {
    bgColor: "blue"
 };
+
 
 Sidebar.propTypes = {
    classes: PropTypes.object.isRequired,

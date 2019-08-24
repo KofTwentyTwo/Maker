@@ -1,5 +1,6 @@
 import React from "react";
 import cx from "classnames";
+import { compose } from 'redux';
 import PropTypes from "prop-types";
 import {Switch, Route, Redirect} from "react-router-dom";
 // creates a beautiful scrollbar
@@ -33,19 +34,9 @@ class Dashboard extends React.Component
       fixedClasses: "dropdown",
       logo: require("../assets/img/logo-white.svg")
    };
-   this.checkAuthentication = checkAuthentication.bind(this);
    mainPanel = React.createRef();
 
 
-   async function checkAuthentication()
-   {
-      const authenticated = await this.props.auth.isAuthenticated();
-      if (authenticated && !this.state.userinfo)
-      {
-         const userinfo = await this.props.auth.getUser();
-         this.setState({ userinfo });
-      }
-   }
 
 
    componentDidMount()
@@ -257,5 +248,6 @@ class Dashboard extends React.Component
 Dashboard.propTypes = {
    classes: PropTypes.object.isRequired
 };
+
 
 export default withStyles(appStyle)(Dashboard);

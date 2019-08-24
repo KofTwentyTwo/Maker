@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import Button from "./Button";
 
-class LoginButton extends Component {
+export default withAuth (class LoginButton extends Component {
    constructor(props) {
       super(props);
       this.state = { authenticated: null };
@@ -12,9 +12,12 @@ class LoginButton extends Component {
       this.logout = this.logout.bind(this);
    }
 
-   async checkAuthentication() {
+   async checkAuthentication()
+   {
       const authenticated = await this.props.auth.isAuthenticated();
-      if (authenticated !== this.state.authenticated) {
+
+      if (authenticated !== this.state.authenticated)
+      {
          this.setState({ authenticated });
       }
    }
@@ -25,12 +28,12 @@ class LoginButton extends Component {
 
    async login() {
       // Redirect to '/' after login
-      this.props.auth.login('/');
+      this.props.auth.login('/admin/projects');
    }
 
    async logout() {
       // Redirect to '/' after logout
-      this.props.auth.logout('/');
+      this.props.auth.logout('/auth/login');
    }
 
    render() {
@@ -48,6 +51,4 @@ class LoginButton extends Component {
          return(<Button color="rose" simple size="lg" block onClick={this.login}>Login</Button>);
       }
    }
-}
-
-export default withAuth(LoginButton);
+});
