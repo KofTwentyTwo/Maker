@@ -24,17 +24,15 @@ var ps;
 
 async function checkAuthentication()
 {
-   console.log("In checkAuthentication()");
-
    const authenticated = await this.props.auth.isAuthenticated();
 
-   if (authenticated && !this.state.userinfo)
+   if (authenticated && !this.state.userInfo.name)
    {
-      const userinfo = await this.props.auth.getUser();
-      this.setState({ userinfo });
+      const userInfo = await this.props.auth.getUser();
+      this.setState({ userInfo });
    }
 
-   console.log("User Info ["+ this.state.userinfo.name +"]");
+   console.log("User Image ["+ this.state.userInfo.picture +"]");
 }
 
 const authDashboard = withAuth(class Dashboard extends React.Component
@@ -45,13 +43,13 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       this.state = {
          mobileOpen: false,
          miniActive: false,
-         image: require("../assets/img/sidebar-2.jpg"),
+         image: require("../assets/img/woodworker-web.jpg"),
          color: "blue",
          bgColor: "black",
          hasImage: true,
          fixedClasses: "dropdown",
          logo: require("../assets/img/logo-white.svg"),
-         userinfo: null
+         userInfo:{}
       };
       this.checkAuthentication = checkAuthentication.bind(this);
    }
@@ -220,8 +218,10 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       return (
             <div className={classes.wrapper}>
                <Sidebar
+                     userName={this.state.userInfo.name}
+                     avatarURL={this.state.userInfo.image}
                      routes={routes}
-                     logoText={"Creative Tim"}
+                     logoText={"Makers4"}
                      logo={this.state.logo}
                      image={this.state.image}
                      handleDrawerToggle={this.handleDrawerToggle}

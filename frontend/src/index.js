@@ -15,13 +15,10 @@ const hist = createBrowserHistory();
 const config = {
    issuer: 'https://dev-998476.okta.com/oauth2/default',
    redirect_uri: window.location.origin + '/implicit/callback',
-   client_id: '0oa16rj1osLTpbWTE357'
+   client_id: '0oa16rj1osLTpbWTE357',
+   pkce: true,
+   scopes: ["openid","profile","email"]
 }
-
-// function onAuthRequired({history})
-// {
-//    history.push('/auth/login');
-// }
 
 ReactDOM.render(
   <Router history={hist}>

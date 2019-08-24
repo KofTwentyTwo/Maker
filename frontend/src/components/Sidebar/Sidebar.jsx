@@ -345,7 +345,8 @@ const authSidebar = withAuth(class Sidebar extends React.Component
          logoText,
          routes,
          bgColor,
-         rtlActive
+         rtlActive,
+         userName,
       } = this.props;
       const itemText =
             classes.itemText +
@@ -403,7 +404,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                            onClick={() => this.openCollapse("openAvatar")}
                      >
                         <ListItemText
-                              primary="Still No Clue..."
+                              primary={userName}
                               secondary={
                                  <b
                                        className={
@@ -428,11 +429,9 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "مع" : "MP"}
-                    </span>
+                    <span className={collapseItemMini}>MP</span>
                                  <ListItemText
-                                       primary={rtlActive ? "ملفي" : "My Profile"}
+                                       primary= "My Profile"
                                        disableTypography={true}
                                        className={collapseItemText}
                                  />
@@ -445,13 +444,9 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "هوع" : "EP"}
-                    </span>
+                    <span className={collapseItemMini}>EP</span>
                                  <ListItemText
-                                       primary={
-                                          rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
-                                       }
+                                       primary="Edit Profile"
                                        disableTypography={true}
                                        className={collapseItemText}
                                  />
@@ -464,11 +459,9 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "و" : "S"}
-                    </span>
+                    <span className={collapseItemMini}>S</span>
                                  <ListItemText
-                                       primary={rtlActive ? "إعدادات" : "Settings"}
+                                       primary="Settings"
                                        disableTypography={true}
                                        className={collapseItemText}
                                  />
@@ -509,17 +502,13 @@ const authSidebar = withAuth(class Sidebar extends React.Component
       var brand = (
             <div className={logoClasses}>
                <a
-                     href="https://www.makers4.com"
-                     target="_blank"
-                     rel="noopener noreferrer"
+                     href="/admin/projects"
                      className={logoMini}
                >
                   <img src={logo} alt="logo" className={classes.img}/>
                </a>
                <a
-                     href="https://www.makers4.com"
-                     target="_blank"
-                     rel="noopener noreferrer"
+                     href="/admin/projects"
                      className={logoNormal}
                >
                   {logoText}
@@ -623,6 +612,7 @@ authSidebar.propTypes = {
       "rose"
    ]),
    logo: PropTypes.string,
+   userName: PropTypes.string,
    logoText: PropTypes.string,
    image: PropTypes.string,
    routes: PropTypes.arrayOf(PropTypes.object),
