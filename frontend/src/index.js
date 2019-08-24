@@ -18,10 +18,10 @@ const config = {
    client_id: '0oa16rj1osLTpbWTE357'
 }
 
-function onAuthRequired({history})
-{
-   history.push('/auth/login');
-}
+// function onAuthRequired({history})
+// {
+//    history.push('/auth/login');
+// }
 
 ReactDOM.render(
   <Router history={hist}>

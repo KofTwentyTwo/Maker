@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withAuth } from '@okta/okta-react';
 
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -65,7 +66,7 @@ class SidebarWrapper extends React.Component
    }
 }
 
-class Sidebar extends React.Component
+const authSidebar = withAuth(class Sidebar extends React.Component
 {
    constructor(props)
    {
@@ -600,15 +601,15 @@ class Sidebar extends React.Component
             </div>
       );
    }
-}
+});
 
 
-Sidebar.defaultProps = {
+authSidebar.defaultProps = {
    bgColor: "blue"
 };
 
 
-Sidebar.propTypes = {
+authSidebar.propTypes = {
    classes: PropTypes.object.isRequired,
    bgColor: PropTypes.oneOf(["white", "black", "blue"]),
    rtlActive: PropTypes.bool,
@@ -637,4 +638,4 @@ SidebarWrapper.propTypes = {
    links: PropTypes.object
 };
 
-export default withStyles(sidebarStyle)(Sidebar);
+export default withStyles(sidebarStyle)(authSidebar);
