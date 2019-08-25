@@ -8,6 +8,7 @@ import OktaSignInWidget from '../../components/OKTA/OktaSignInWidget.jsx';
 import {withAuth} from '@okta/okta-react';
 import loginPageStyle from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
 
+
 const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
 {
    constructor(props)
@@ -23,6 +24,7 @@ const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
       this.checkAuthentication();
    }
 
+
    async checkAuthentication()
    {
       const authenticated = await this.props.auth.isAuthenticated();
@@ -32,10 +34,12 @@ const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
       }
    }
 
+
    componentDidUpdate()
    {
       this.checkAuthentication();
    }
+
 
    onSuccess(res)
    {
@@ -45,18 +49,16 @@ const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
       }
       else
       {
-         alert("onSuccess - Error logging in - something has happened - we dont know what...");
-         // The user can be in another authentication state that requires further action.
-         // For more information about these states, see:
-         //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+         console.warn("Successful Login - But Unhandled Status Code Returned [" + res.status + "]", res);
       }
    }
 
+
    onError(err)
    {
-      console.log('error logging in', err);
-      alert("onError - Error logging in - something has happened - we dont know what...");
+      console.warn('Error logging in - Unsure Why', err);
    }
+
 
    render()
    {
@@ -64,27 +66,27 @@ const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
       {
          return null;
       }
-      if (this.state.authenticated)
+      else if (this.state.authenticated)
       {
-         return (
-               <Redirect to={{pathname: '/admin/projects'}}/>
-         );
+         return (<Redirect to={{pathname: '/admin/projects'}}/>);
       }
       else
       {
          const {classes} = this.props;
+
+         // TODO: Clean up this Base URL - Get it into the core Okta config somewhere...
          return (
                <div className={classes.container}>
                   <GridContainer justify="center">
                      <GridItem xs={12} sm={6} md={4}>
-                        <OktaSignInWidget baseUrl="https://dev-998476.okta.com/" onSuccess={this.onSuccess}
-                                          onError={this.onError}/>
+                        <OktaSignInWidget baseUrl="https://dev-998476.okta.com/" onSuccess={this.onSuccess} onError={this.onError}/>
                      </GridItem>
                   </GridContainer>
                </div>
          );
       }
    }
+
 });
 
 authOktaLoginPage.propTypes =

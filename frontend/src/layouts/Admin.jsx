@@ -3,20 +3,16 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {withAuth} from '@okta/okta-react';
-// creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// core components
 import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
-
 import routes from "../routes.js";
-
 import appStyle from "../assets/jss/material-dashboard-pro-react/layouts/adminStyle.jsx";
+
 
 var ps;
 
@@ -24,6 +20,7 @@ var ps;
 const authDashboard = withAuth(class Dashboard extends React.Component
 {
    mainPanel = React.createRef();
+
 
    constructor(props)
    {
@@ -37,19 +34,33 @@ const authDashboard = withAuth(class Dashboard extends React.Component
          hasImage: true,
          fixedClasses: "dropdown",
          logo: require("../assets/img/logo-white.svg"),
-         userInfo: {}
+         username: null
       };
       this.checkAuthentication = this.checkAuthentication.bind(this);
    }
 
+
    async checkAuthentication()
    {
+      //////////////////////////////////////////////////////////////////////////////////////
+      // Handle the basic concept of being authed and ensuring our state is aware of that //
+      //////////////////////////////////////////////////////////////////////////////////////
       const authenticated = await this.props.auth.isAuthenticated();
       if (authenticated !== this.state.authenticated)
       {
-         this.setState({authenticated});
+         this.setState({authenticated: true});
+      }
+
+      ///////////////////////////////////////////////////////////
+      // Get and populate the user info into the current state //
+      ///////////////////////////////////////////////////////////
+      if (authenticated && !this.state.username)
+      {
+         const userinfo = await this.props.auth.getUser();
+         this.setState({username: userinfo.name});
       }
    }
+
 
    async componentDidMount()
    {
@@ -62,8 +73,13 @@ const authDashboard = withAuth(class Dashboard extends React.Component
          document.body.style.overflow = "hidden";
       }
       window.addEventListener("resize", this.resizeFunction);
+
+      //////////////////////////
+      // Needed for Okta Auth //
+      //////////////////////////
       this.checkAuthentication();
    }
+
 
    componentWillUnmount()
    {
@@ -73,6 +89,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       }
       window.removeEventListener("resize", this.resizeFunction);
    }
+
 
    async componentDidUpdate(e)
    {
@@ -84,18 +101,25 @@ const authDashboard = withAuth(class Dashboard extends React.Component
             this.setState({mobileOpen: false});
          }
       }
+
+      //////////////////////////
+      // Needed for Okta Auth //
+      //////////////////////////
       this.checkAuthentication();
    }
+
 
    handleImageClick = image =>
    {
       this.setState({image: image});
    };
 
+
    handleColorClick = color =>
    {
       this.setState({color: color});
    };
+
 
    handleBgColorClick = bgColor =>
    {
@@ -111,6 +135,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       this.setState({bgColor: bgColor});
    };
 
+
    handleFixedClick = () =>
    {
       if (this.state.fixedClasses === "dropdown")
@@ -123,15 +148,18 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       }
    };
 
+
    handleDrawerToggle = () =>
    {
       this.setState({mobileOpen: !this.state.mobileOpen});
    };
 
+
    getRoute = () =>
    {
       return window.location.pathname !== "/admin/full-screen-maps";
    };
+
 
    getActiveRoute = routes =>
    {
@@ -159,6 +187,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       return activeRoute;
    };
 
+
    getRoutes = routes =>
    {
       return routes.map((prop, key) =>
@@ -184,10 +213,12 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       });
    };
 
+
    sidebarMinimize = () =>
    {
       this.setState({miniActive: !this.state.miniActive});
    };
+
 
    resizeFunction = () =>
    {
@@ -196,6 +227,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
          this.setState({mobileOpen: false});
       }
    };
+
 
    render()
    {
@@ -217,8 +249,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       return (
             <div className={classes.wrapper}>
                <Sidebar
-                     userName={this.state.userInfo.name}
-                     avatarURL={this.state.userInfo.image}
+                     username={this.state.username}
                      routes={routes}
                      logoText={"Makers4"}
                      logo={this.state.logo}
@@ -275,6 +306,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       );
    }
 });
+
 
 authDashboard.propTypes = {
    classes: PropTypes.object.isRequired

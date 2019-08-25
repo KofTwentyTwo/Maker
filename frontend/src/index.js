@@ -7,6 +7,7 @@ import AuthLayout from "layouts/Auth.jsx";
 import AdminLayout from "layouts/Admin.jsx";
 import "assets/scss/material-dashboard-pro-react.scss?v=1.7.0";
 
+
 const history = createBrowserHistory();
 
 const config =
@@ -16,10 +17,12 @@ const config =
          client_id: '0oa16rj1osLTpbWTE357'
       }
 
+
 function onAuthRequired({auth, history})
 {
    history.push('/auth/login');
 }
+
 
 ReactDOM.render(
       <Router history={history}>

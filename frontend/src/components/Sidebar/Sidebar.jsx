@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withAuth } from '@okta/okta-react';
-
-// javascript plugin used to create scrollbars on windows
+import {withAuth} from '@okta/okta-react';
 import PerfectScrollbar from "perfect-scrollbar";
 import {NavLink} from "react-router-dom";
 import cx from "classnames";
-
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -16,13 +12,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Hidden from "@material-ui/core/Hidden";
 import Collapse from "@material-ui/core/Collapse";
 import Icon from "@material-ui/core/Icon";
-
-// core components
 import AdminNavbarLinks from "../../components/Navbars/AdminNavbarLinks.jsx";
-
 import sidebarStyle from "../../assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx";
-
 import avatar from "../../assets/img/faces/avatar.jpg";
+
 
 var ps;
 
@@ -33,6 +26,7 @@ var ps;
 class SidebarWrapper extends React.Component
 {
    sidebarWrapper = React.createRef();
+
 
    componentDidMount()
    {
@@ -45,6 +39,7 @@ class SidebarWrapper extends React.Component
       }
    }
 
+
    componentWillUnmount()
    {
       if (navigator.platform.indexOf("Win") > -1)
@@ -52,6 +47,7 @@ class SidebarWrapper extends React.Component
          ps.destroy();
       }
    }
+
 
    render()
    {
@@ -66,6 +62,7 @@ class SidebarWrapper extends React.Component
    }
 }
 
+
 const authSidebar = withAuth(class Sidebar extends React.Component
 {
    constructor(props)
@@ -77,7 +74,6 @@ const authSidebar = withAuth(class Sidebar extends React.Component
          ...this.getCollapseStates(props.routes)
       };
    }
-
    mainPanel = React.createRef();
 
 
@@ -221,12 +217,10 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                     <prop.icon className={itemIcon}/>
                               )
                         ) : (
-                              <span className={collapseItemMini}>
-                  {rtlActive ? prop.rtlMini : prop.mini}
-                </span>
+                              <span className={collapseItemMini}>{prop.mini}</span>
                         )}
                         <ListItemText
-                              primary={rtlActive ? prop.rtlName : prop.name}
+                              primary={prop.name}
                               secondary={
                                  <b
                                        className={
@@ -322,7 +316,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
               </span>
                      )}
                      <ListItemText
-                           primary={rtlActive ? prop.rtlName : prop.name}
+                           primary={prop.name}
                            disableTypography={true}
                            className={cx(
                                  {[itemText]: prop.icon !== undefined},
@@ -346,7 +340,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
          routes,
          bgColor,
          rtlActive,
-         userName,
+         username,
       } = this.props;
       const itemText =
             classes.itemText +
@@ -393,9 +387,14 @@ const authSidebar = withAuth(class Sidebar extends React.Component
             });
       var user = (
             <div className={userWrapperClass}>
+
+               {/*Pull out the concept of an avatar for now - since we have no ability to pull one from */}
+               {/*Okta - and we dont want to get into the pain of upload for one for beta */}
+               {/* TODO: Pull in the concept for an Avatar again here at some point */}
                <div className={photo}>
                   <img src={avatar} className={classes.avatarImg} alt="..."/>
                </div>
+
                <List className={classes.list}>
                   <ListItem className={classes.item + " " + classes.userItem}>
                      <NavLink
@@ -404,7 +403,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                            onClick={() => this.openCollapse("openAvatar")}
                      >
                         <ListItemText
-                              primary={userName}
+                              primary={username}
                               secondary={
                                  <b
                                        className={
@@ -429,9 +428,9 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>MP</span>
+                                 <span className={collapseItemMini}>MP</span>
                                  <ListItemText
-                                       primary= "My Profile"
+                                       primary="My Profile"
                                        disableTypography={true}
                                        className={collapseItemText}
                                  />
@@ -444,7 +443,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>EP</span>
+                                 <span className={collapseItemMini}>EP</span>
                                  <ListItemText
                                        primary="Edit Profile"
                                        disableTypography={true}
@@ -459,7 +458,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                                        classes.itemLink + " " + classes.userCollapseLinks
                                     }
                               >
-                    <span className={collapseItemMini}>S</span>
+                                 <span className={collapseItemMini}>S</span>
                                  <ListItemText
                                        primary="Settings"
                                        disableTypography={true}
@@ -473,6 +472,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                </List>
             </div>
       );
+
       var links = (
             <List className={classes.list}>{this.createLinks(routes)}</List>
       );
@@ -537,7 +537,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                <Hidden mdUp implementation="css">
                   <Drawer
                         variant="temporary"
-                        anchor={rtlActive ? "left" : "right"}
+                        anchor="right"
                         open={this.props.open}
                         classes={{
                            paper: drawerPaper + " " + classes[bgColor + "Background"]
@@ -566,7 +566,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                   <Drawer
                         onMouseOver={() => this.setState({miniActive: false})}
                         onMouseOut={() => this.setState({miniActive: true})}
-                        anchor={rtlActive ? "right" : "left"}
+                        anchor="left"
                         variant="permanent"
                         open
                         classes={{
@@ -612,7 +612,7 @@ authSidebar.propTypes = {
       "rose"
    ]),
    logo: PropTypes.string,
-   userName: PropTypes.string,
+   username: PropTypes.string.required,
    logoText: PropTypes.string,
    image: PropTypes.string,
    routes: PropTypes.arrayOf(PropTypes.object),
