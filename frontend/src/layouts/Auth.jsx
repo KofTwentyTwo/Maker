@@ -2,22 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Redirect} from "react-router-dom";
 
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
-// core components
 import AuthNavbar from "../components/Navbars/AuthNavbar.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-
 import routes from "../routes.js";
-
 import pagesStyle from "../assets/jss/material-dashboard-pro-react/layouts/authStyle.jsx";
 
-import registerBG    from '../assets/img/woodworker-web.jpg';
-import loginBG       from "../assets/img/woodworker-web.jpg";
-import lockBG        from "../assets/img/woodworker-web.jpg";
-import errorBG       from "../assets/img/woodworker-web.jpg";
-import pricingBG     from "../assets/img/woodworker-web.jpg";
+import registerBG    from '../assets/img/woodworker-2-web.jpg';
+import loginBG       from "../assets/img/woodworker-2-web.jpg";
+import lockBG        from "../assets/img/woodworker-2-web.jpg";
+import errorBG       from "../assets/img/woodworker-2-web.jpg";
+import pricingBG     from "../assets/img/woodworker-2-web.jpg";
+
 
 class Pages extends React.Component
 {
@@ -30,6 +27,7 @@ class Pages extends React.Component
 
    getRoutes = routes =>
    {
+      // Only return the routes that we care about that are part of the auth layout //
       return routes.map((prop, key) =>
       {
          if (prop.collapse)
@@ -38,13 +36,7 @@ class Pages extends React.Component
          }
          if (prop.layout === "/auth")
          {
-            return (
-                  <Route
-                        path={prop.layout + prop.path}
-                        component={prop.component}
-                        key={key}
-                  />
-            );
+            return (<Route path={prop.layout + prop.path} component={prop.component} key={key}/>);
          }
          else
          {
@@ -55,26 +47,12 @@ class Pages extends React.Component
 
    getBgImage = () =>
    {
-      if (window.location.pathname.indexOf("/auth/signup") !== -1)
-      {
-         return registerBG;
-      }
-      else if (window.location.pathname.indexOf("/auth/login") !== -1)
-      {
-         return loginBG;
-      }
-      else if (window.location.pathname.indexOf("/auth/pricing") !== -1)
-      {
-         return pricingBG;
-      }
-      else if (window.location.pathname.indexOf("/auth/lock-screen-page") !== -1)
-      {
-         return lockBG;
-      }
-      else if (window.location.pathname.indexOf("/auth/error-page") !== -1)
-      {
-         return errorBG;
-      }
+      if (window.location.pathname.indexOf("/auth/signup")                 !== -1) {return registerBG;}
+      else if (window.location.pathname.indexOf("/auth/login")             !== -1) {return loginBG;}
+      else if (window.location.pathname.indexOf("/auth/okta-login")        !== -1) {return loginBG;}
+      else if (window.location.pathname.indexOf("/auth/pricing")           !== -1) {return pricingBG;}
+      else if (window.location.pathname.indexOf("/auth/lock-screen-page")  !== -1) {return lockBG;}
+      else if (window.location.pathname.indexOf("/auth/error-page")        !== -1) {return errorBG;}
    };
 
    getActiveRoute = routes =>
@@ -93,9 +71,7 @@ class Pages extends React.Component
          }
          else
          {
-            if (
-                  window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-            )
+            if (window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1)
             {
                return routes[i].name;
             }

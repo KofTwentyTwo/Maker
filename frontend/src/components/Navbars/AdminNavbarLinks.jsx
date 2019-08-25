@@ -18,7 +18,6 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import {withAuth} from '@okta/okta-react';
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
@@ -28,17 +27,14 @@ import Grow from "@material-ui/core/Grow";
 import Hidden from "@material-ui/core/Hidden";
 import Popper from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
-// @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
 import Dashboard from "@material-ui/icons/Dashboard";
 import Search from "@material-ui/icons/Search";
-// core components
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 
 import adminNavbarLinksStyle from "../../assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.jsx";
-// import { Manager, Target, Popper } from "react-popper";
 
 const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
 {
@@ -103,9 +99,9 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                         className: classes.top + " " + classes.search
                      }}
                      inputProps={{
-                        placeholder: rtlActive ? "بحث" : "Search",
+                        placeholder: "Search",
                         inputProps: {
-                           "aria-label": rtlActive ? "بحث" : "Search",
+                           "aria-label": "Search",
                            className: classes.searchInput
                         }
                      }}
@@ -126,24 +122,18 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                      simple
                      aria-label="Dashboard"
                      justIcon
-                     className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+                     className={classes.buttonLink}
                      muiClasses={{
-                        label: rtlActive ? classes.labelRTL : ""
+                        label: ""
                      }}
                >
                   <Dashboard
                         className={
-                           classes.headerLinksSvg +
-                           " " +
-                           (rtlActive
-                                 ? classes.links + " " + classes.linksRTL
-                                 : classes.links)
+                           classes.headerLinksSvg + " " + classes.links
                         }
                   />
                   <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? "لوحة القيادة" : "Dashboard"}
-            </span>
+            <span className={classes.linkText}>Dashboard</span>
                   </Hidden>
                </Button>
                <div className={managerClasses}>
@@ -154,9 +144,9 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                         aria-owns={openNotification ? "notification-menu-list" : null}
                         aria-haspopup="true"
                         onClick={this.handleClickNotification}
-                        className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+                        className={classes.buttonLink}
                         muiClasses={{
-                           label: rtlActive ? classes.labelRTL : ""
+                           label: ""
                         }}
                         buttonRef={node =>
                         {
@@ -165,21 +155,12 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                   >
                      <Notifications
                            className={
-                              classes.headerLinksSvg +
-                              " " +
-                              (rtlActive
-                                    ? classes.links + " " + classes.linksRTL
-                                    : classes.links)
+                              classes.headerLinksSvg + " " + classes.links
                            }
                      />
                      <span className={classes.notifications}>5</span>
                      <Hidden mdUp implementation="css">
-              <span
-                    onClick={this.handleClickNotification}
-                    className={classes.linkText}
-              >
-                {rtlActive ? "إعلام" : "Notification"}
-              </span>
+                        <span onClick={this.handleClickNotification} className={classes.linkText}>Notification</span>
                      </Hidden>
                   </Button>
                   <Popper
@@ -202,43 +183,7 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                            >
                               <Paper className={classes.dropdown}>
                                  <ClickAwayListener onClickAway={this.handleCloseNotification}>
-                                    <MenuList role="menu">
-                                       <MenuItem
-                                             onClick={this.handleCloseNotification}
-                                             className={dropdownItem}
-                                       >
-                                          {rtlActive
-                                                ? "إجلاء أوزار الأسيوي حين بل, كما"
-                                                : "Mike John responded to your email"}
-                                       </MenuItem>
-                                       <MenuItem
-                                             onClick={this.handleCloseNotification}
-                                             className={dropdownItem}
-                                       >
-                                          {rtlActive
-                                                ? "شعار إعلان الأرضية قد ذلك"
-                                                : "You have 5 new tasks"}
-                                       </MenuItem>
-                                       <MenuItem
-                                             onClick={this.handleCloseNotification}
-                                             className={dropdownItem}
-                                       >
-                                          {rtlActive
-                                                ? "ثمّة الخاصّة و على. مع جيما"
-                                                : "You're now friend with Andrew"}
-                                       </MenuItem>
-                                       <MenuItem
-                                             onClick={this.handleCloseNotification}
-                                             className={dropdownItem}
-                                       >
-                                          {rtlActive ? "قد علاقة" : "Another Notification"}
-                                       </MenuItem>
-                                       <MenuItem
-                                             onClick={this.handleCloseNotification}
-                                             className={dropdownItem}
-                                       >
-                                          {rtlActive ? "قد فاتّبع" : "Another One"}
-                                       </MenuItem>
+                                    <MenuList role="menu"><MenuItem onClick={this.handleCloseNotification} className={dropdownItem}>Example Notification Message</MenuItem>
                                     </MenuList>
                                  </ClickAwayListener>
                               </Paper>
@@ -255,9 +200,9 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                         aria-owns={openNotification ? "profile-menu-list" : null}
                         aria-haspopup="true"
                         onClick={this.handleClickProfile}
-                        className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+                        className={classes.buttonLink}
                         muiClasses={{
-                           label: rtlActive ? classes.labelRTL : ""
+                           label: ""
                         }}
                         buttonRef={node =>
                         {
@@ -266,20 +211,11 @@ const authHeaderLinks = withAuth(class HeaderLinks extends React.Component
                   >
                      <Person
                            className={
-                              classes.headerLinksSvg +
-                              " " +
-                              (rtlActive
-                                    ? classes.links + " " + classes.linksRTL
-                                    : classes.links)
+                              classes.headerLinksSvg + " " + classes.links
                            }
                      />
                      <Hidden mdUp implementation="css">
-              <span
-                    onClick={this.handleClickProfile}
-                    className={classes.linkText}
-              >
-                {rtlActive ? "الملف الشخصي" : "Profile"}
-              </span>
+                        <span onClick={this.handleClickProfile} className={classes.linkText}>Profile</span>
                      </Hidden>
                   </Button>
                   <Popper

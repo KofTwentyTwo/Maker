@@ -9,10 +9,8 @@ import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 import GridSystem from "views/Components/GridSystem.jsx";
 import Icons from "views/Components/Icons.jsx";
-import LoginPage from "views/Pages/LoginPage.jsx";
 import Notifications from "views/Components/Notifications.jsx";
 import Panels from "views/Components/Panels.jsx";
-import PricingPage from "views/Pages/PricingPage.jsx";
 import ReactTables from "views/Tables/ReactTables.jsx";
 import RegisterPage from "views/Pages/RegisterPage.jsx";
 import RegularForms from "views/Forms/RegularForms.jsx";
@@ -34,6 +32,7 @@ import Image from "@material-ui/icons/Image";
 import Place from "@material-ui/icons/Place";
 import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
+import OktaLoginPage from "./views/Pages/OktaLoginPage";
 
 var dashRoutes = [
    {
@@ -49,18 +48,18 @@ var dashRoutes = [
       icon: Image,
       state: "pageCollapse",
       views: [
-         {
-            path: "/pricing-page",
-            name: "Pricing",
-            mini: "PP",
-            component: PricingPage,
-            layout: "/auth"
-         },
+         // {
+         //    path: "/pricing-page",
+         //    name: "Pricing",
+         //    mini: "PP",
+         //    component: PricingPage,
+         //    layout: "/auth"
+         // },
          {
             path: "/login",
             name: "Makers4 / Login",
             mini: "L",
-            component: LoginPage,
+            component: OktaLoginPage,
             layout: "/auth"
          },
          {

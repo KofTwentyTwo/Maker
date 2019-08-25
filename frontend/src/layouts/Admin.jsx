@@ -1,15 +1,13 @@
 import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
-import {Switch, Route, Redirect} from "react-router-dom";
-import { withAuth } from '@okta/okta-react';
+import {Redirect, Route, Switch} from "react-router-dom";
+import {withAuth} from '@okta/okta-react';
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
 // core components
 import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
 import Footer from "../components/Footer/Footer.jsx";
@@ -22,21 +20,11 @@ import appStyle from "../assets/jss/material-dashboard-pro-react/layouts/adminSt
 
 var ps;
 
-async function checkAuthentication()
-{
-   const authenticated = await this.props.auth.isAuthenticated();
-
-   if (authenticated && !this.state.userInfo.name)
-   {
-      const userInfo = await this.props.auth.getUser();
-      this.setState({ userInfo });
-   }
-
-   console.log("User Image ["+ this.state.userInfo.picture +"]");
-}
 
 const authDashboard = withAuth(class Dashboard extends React.Component
 {
+   mainPanel = React.createRef();
+
    constructor(props)
    {
       super(props);
@@ -49,17 +37,22 @@ const authDashboard = withAuth(class Dashboard extends React.Component
          hasImage: true,
          fixedClasses: "dropdown",
          logo: require("../assets/img/logo-white.svg"),
-         userInfo:{}
+         userInfo: {}
       };
-      this.checkAuthentication = checkAuthentication.bind(this);
+      this.checkAuthentication = this.checkAuthentication.bind(this);
    }
-   mainPanel = React.createRef();
 
-
-   componentDidMount()
+   async checkAuthentication()
    {
-      this.checkAuthentication();
+      const authenticated = await this.props.auth.isAuthenticated();
+      if (authenticated !== this.state.authenticated)
+      {
+         this.setState({authenticated});
+      }
+   }
 
+   async componentDidMount()
+   {
       if (navigator.platform.indexOf("Win") > -1)
       {
          ps = new PerfectScrollbar(this.mainPanel.current, {
@@ -69,6 +62,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
          document.body.style.overflow = "hidden";
       }
       window.addEventListener("resize", this.resizeFunction);
+      this.checkAuthentication();
    }
 
    componentWillUnmount()
@@ -80,10 +74,8 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       window.removeEventListener("resize", this.resizeFunction);
    }
 
-   componentDidUpdate(e)
+   async componentDidUpdate(e)
    {
-      this.checkAuthentication();
-
       if (e.history.location.pathname !== e.location.pathname)
       {
          this.mainPanel.current.scrollTop = 0;
@@ -92,6 +84,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
             this.setState({mobileOpen: false});
          }
       }
+      this.checkAuthentication();
    }
 
    handleImageClick = image =>
@@ -206,6 +199,12 @@ const authDashboard = withAuth(class Dashboard extends React.Component
 
    render()
    {
+      if (this.state.authenticated === null)
+      {
+         alert("could do the Doing the return null in admin thing");
+         return null;
+      }
+
       const {classes, ...rest} = this.props;
       const mainPanel =
             classes.mainPanel +

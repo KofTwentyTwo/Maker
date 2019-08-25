@@ -96,7 +96,7 @@ class AuthNavbar extends React.Component
                   <NavLink
                         to={"/auth/signup"}
                         className={cx(classes.navLink, {
-                           [classes.navLinkActive]: this.activeRoute("/auth/register-page")
+                           [classes.navLinkActive]: this.activeRoute("/auth/signup")
                         })}
                   >
                      <PersonAdd className={classes.listItemIcon}/>
@@ -111,7 +111,7 @@ class AuthNavbar extends React.Component
                   <NavLink
                         to={"/auth/login"}
                         className={cx(classes.navLink, {
-                           [classes.navLinkActive]: this.activeRoute("/auth/login-page")
+                           [classes.navLinkActive]: this.activeRoute("/auth/login")
                         })}
                   >
                      <Fingerprint className={classes.listItemIcon}/>

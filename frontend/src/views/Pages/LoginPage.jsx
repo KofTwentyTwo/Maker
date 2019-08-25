@@ -22,9 +22,12 @@ import CardBody from "../../components/Card/CardBody.jsx";
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
 
+import OktaSignInWidget from '../../components/OKTA/OktaSignInWidget.jsx';
+import { withAuth } from '@okta/okta-react';
+
 import loginPageStyle from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
 
-class LoginPage extends React.Component
+const authLoginPage = withAuth(class LoginPage extends React.Component
 {
    constructor(props)
    {
@@ -35,7 +38,41 @@ class LoginPage extends React.Component
          authenticated: null
       };
 
+      this.onSuccess = this.onSuccess.bind(this);
+      this.onError = this.onError.bind(this);
+      this.checkAuthentication();
    }
+
+   async checkAuthentication() {
+      const authenticated = await this.props.auth.isAuthenticated();
+      if (authenticated !== this.state.authenticated) {
+         this.setState({ authenticated });
+      }
+   }
+
+   componentDidUpdate() {
+      this.checkAuthentication();
+   }
+
+   onSuccess(res) {
+      if (res.status === 'SUCCESS') {
+         return this.props.auth.redirect({
+            sessionToken: res.session.token
+         });
+      } else {
+         // The user can be in another authentication state that requires further action.
+         // For more information about these states, see:
+         //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+      }
+   }
+
+   onError(err) {
+      console.log('error logging in', err);
+   }
+
+
+
+
 
    componentDidMount()
    {
@@ -65,10 +102,7 @@ class LoginPage extends React.Component
                   <GridItem xs={12} sm={6} md={4}>
                      <form>
                         <Card login className={classes[this.state.cardAnimaton]}>
-                           <CardHeader
-                                 className={`${classes.cardHeader} ${classes.textCenter}`}
-                                 color="rose"
-                           >
+                           <CardHeader className={`${classes.cardHeader} ${classes.textCenter}`} color="rose">
                               <h4 className={classes.cardTitle}>Log in</h4>
                               <div className={classes.socialLine}>
                                  {[
@@ -146,12 +180,13 @@ class LoginPage extends React.Component
                   </GridItem>
                </GridContainer>
             </div>
+
       );
    }
-}
+});
 
-LoginPage.propTypes = {
+authLoginPage.propTypes = {
    classes: PropTypes.object.isRequired
 };
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(loginPageStyle)(authLoginPage);
