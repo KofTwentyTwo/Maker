@@ -3,7 +3,7 @@ import registerBG               from 'assets/img/woodworker-2-web.jpg';
 import loginBG                  from 'assets/img/woodworker-2-web.jpg';
 import errorBG                  from 'assets/img/woodworker-2-web.jpg';
 import pagesStyle               from "assets/jss/material-dashboard-pro-react/layouts/authStyle.jsx";
-import Footer                   from "components/Footer/Footer.jsx";
+import Footer                   from "makers4/components/Footer/Footer.jsx";
 import AuthNavbar               from "components/Navbars/AuthNavbar.jsx";
 import {PublicRoutes as routes} from "makers4/Makers4Routes.js";
 import PropTypes                from "prop-types";

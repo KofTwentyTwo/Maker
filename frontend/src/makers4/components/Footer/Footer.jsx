@@ -1,29 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
-
-// @material-ui/core components
+import List       from "@material-ui/core/List";
+import ListItem   from "@material-ui/core/ListItem";
 import withStyles from "@material-ui/core/styles/withStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 
 import footerStyle from "assets/jss/material-dashboard-pro-react/components/footerStyle";
+import cx          from "classnames";
+import PropTypes   from "prop-types";
+import React       from "react";
+
 
 function Footer({...props})
 {
    const {classes, fluid, white} = props;
-   var container = cx({
-      [classes.container]: !fluid,
+   var container                 = cx({
+      [classes.container]:      !fluid,
       [classes.containerFluid]: fluid,
-      [classes.whiteColor]: white
+      [classes.whiteColor]:     white
    });
-   var anchor =
-         classes.a +
-         cx({
-            [" " + classes.whiteColor]: white
-         });
-   var block = cx({
-      [classes.block]: true,
+   var anchor                    =
+             classes.a +
+             cx({
+                [" " + classes.whiteColor]: white
+             });
+   var block                     = cx({
+      [classes.block]:      true,
       [classes.whiteColor]: white
    });
    return (
@@ -61,7 +60,7 @@ function Footer({...props})
                         target="_blank"
                         rel="noopener noreferrer"
                   >
-                      Makers4
+                     Makers4
                   </a>
                   &nbsp; / Software Made With Love for Woodworkers, Cabinet Builders, Creators, and Hobbyists
                </p>
@@ -70,10 +69,11 @@ function Footer({...props})
    );
 }
 
+
 Footer.propTypes = {
    classes: PropTypes.object.isRequired,
-   fluid: PropTypes.bool,
-   white: PropTypes.bool,
+   fluid:   PropTypes.bool,
+   white:   PropTypes.bool,
 };
 
 export default withStyles(footerStyle)(Footer);

@@ -3,7 +3,7 @@ import {withAuth}       from '@okta/okta-react';
 import appStyle         from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.jsx";
 import cx               from "classnames";
 import FixedPlugin      from "components/FixedPlugin/FixedPlugin.jsx";
-import Footer           from "components/Footer/Footer.jsx";
+import Footer           from "makers4/components/Footer/Footer.jsx";
 import AdminNavbar      from "components/Navbars/AdminNavbar.jsx";
 import Sidebar          from "components/Sidebar/Sidebar.jsx";
 import {ApplicationRoutes as routes}           from "makers4/Makers4Routes";

@@ -3,7 +3,7 @@ import {withAuth}       from '@okta/okta-react';
 import loginPageStyle   from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
 import GridContainer    from "components/Grid/GridContainer.jsx";
 import GridItem         from "components/Grid/GridItem.jsx";
-import OktaSignInWidget from 'components/OKTA/OktaSignInWidget.jsx';
+import OktaSignInWidget from 'makers4/components/Widgets/OktaSignInWidget.jsx';
 import PropTypes        from "prop-types";
 import React            from "react";
 import {Redirect}       from 'react-router-dom';
