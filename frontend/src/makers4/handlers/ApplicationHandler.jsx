@@ -1,6 +1,12 @@
 import withStyles       from "@material-ui/core/styles/withStyles";
 import {withAuth}       from '@okta/okta-react';
+import appStyle         from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.jsx";
 import cx               from "classnames";
+import FixedPlugin      from "components/FixedPlugin/FixedPlugin.jsx";
+import Footer           from "components/Footer/Footer.jsx";
+import AdminNavbar      from "components/Navbars/AdminNavbar.jsx";
+import Sidebar          from "components/Sidebar/Sidebar.jsx";
+import routes           from "makers4/routes.js";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import PropTypes        from "prop-types";
@@ -10,12 +16,6 @@ import {
    Route,
    Switch
 }                       from "react-router-dom";
-import appStyle         from "../assets/jss/material-dashboard-pro-react/layouts/adminStyle.jsx";
-import FixedPlugin      from "../components/FixedPlugin/FixedPlugin.jsx";
-import Footer           from "../components/Footer/Footer.jsx";
-import AdminNavbar      from "../components/Navbars/AdminNavbar.jsx";
-import Sidebar          from "../components/Sidebar/Sidebar.jsx";
-import routes           from "../routes.js";
 
 
 var ps;
@@ -31,12 +31,12 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       this.state = {
          mobileOpen:   false,
          miniActive:   false,
-         image:        require("../assets/img/woodworker-web.jpg"),
+         image:        require("assets/img/woodworker-web.jpg"),
          color:        "blue",
          bgColor:      "black",
          hasImage:     true,
          fixedClasses: "dropdown",
-         logo:         require("../assets/img/logo-white.svg"),
+         logo:         require("assets/img/logo-white.svg"),
          username:     null
       };
 
@@ -141,10 +141,10 @@ const authDashboard = withAuth(class Dashboard extends React.Component
       switch (bgColor)
       {
          case "white":
-            this.setState({logo: require("../assets/img/logo.svg")});
+            this.setState({logo: require("assets/img/logo.svg")});
             break;
          default:
-            this.setState({logo: require("../assets/img/logo-white.svg")});
+            this.setState({logo: require("assets/img/logo-white.svg")});
             break;
       }
       this.setState({bgColor: bgColor});

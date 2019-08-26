@@ -1,42 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import withStyles from "@material-ui/core/styles/withStyles";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
+import FormControl      from "@material-ui/core/FormControl";
+import FormHelperText   from "@material-ui/core/FormHelperText";
+import Input            from "@material-ui/core/Input";
+import InputLabel       from "@material-ui/core/InputLabel";
+import withStyles       from "@material-ui/core/styles/withStyles";
+import classNames       from "classnames";
+import PropTypes        from "prop-types";
+import React            from "react";
 import customInputStyle from "../../assets/jss/material-dashboard-pro-react/components/customInputStyle.jsx";
 
 
 function CustomInput({...props})
 {
    const {
-      classes,
-      formControlProps,
-      labelText,
-      id,
-      labelProps,
-      inputProps,
-      error,
-      white,
-      inputRootCustomClasses,
-      success,
-      helperText
-   } = props;
+            classes,
+            formControlProps,
+            labelText,
+            id,
+            labelProps,
+            inputProps,
+            error,
+            white,
+            inputRootCustomClasses,
+            success,
+            helperText
+         } = props;
 
    const labelClasses = classNames(
          {
-            [" " + classes.labelRootError]: error,
+            [" " + classes.labelRootError]:   error,
             [" " + classes.labelRootSuccess]: success && !error
          });
 
    const underlineClasses = classNames(
          {
-            [classes.underlineError]: error,
+            [classes.underlineError]:   error,
             [classes.underlineSuccess]: success && !error,
-            [classes.underline]: true,
-            [classes.whiteUnderline]: white
+            [classes.underline]:        true,
+            [classes.whiteUnderline]:   white
          });
 
    const marginTop = classNames(
@@ -46,7 +46,7 @@ function CustomInput({...props})
 
    const inputClasses = classNames(
          {
-            [classes.input]: true,
+            [classes.input]:      true,
             [classes.whiteInput]: white
          });
 
@@ -62,7 +62,7 @@ function CustomInput({...props})
 
    var helpTextClasses = classNames(
          {
-            [classes.labelRootError]: error,
+            [classes.labelRootError]:   error,
             [classes.labelRootSuccess]: success && !error
          });
 
@@ -76,9 +76,9 @@ function CustomInput({...props})
             ) : null}
             <Input
                   classes={{
-                     input: inputClasses,
-                     root: marginTop,
-                     disabled: classes.disabled,
+                     input:     inputClasses,
+                     root:      marginTop,
+                     disabled:  classes.disabled,
                      underline: underlineClasses
                   }}
                   id={id}
@@ -95,17 +95,17 @@ function CustomInput({...props})
 
 
 CustomInput.propTypes = {
-   classes: PropTypes.object.isRequired,
-   labelText: PropTypes.node,
-   labelProps: PropTypes.object,
-   id: PropTypes.string,
-   inputProps: PropTypes.object,
-   formControlProps: PropTypes.object,
+   classes:                PropTypes.object.isRequired,
+   labelText:              PropTypes.node,
+   labelProps:             PropTypes.object,
+   id:                     PropTypes.string,
+   inputProps:             PropTypes.object,
+   formControlProps:       PropTypes.object,
    inputRootCustomClasses: PropTypes.string,
-   error: PropTypes.bool,
-   success: PropTypes.bool,
-   white: PropTypes.bool,
-   helperText: PropTypes.node
+   error:                  PropTypes.bool,
+   success:                PropTypes.bool,
+   white:                  PropTypes.bool,
+   helperText:             PropTypes.node
 };
 
 export default withStyles(customInputStyle)(CustomInput);

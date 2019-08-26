@@ -8,19 +8,19 @@ import Email             from "@material-ui/icons/Email";
 import Face              from "@material-ui/icons/Face";
 import PropTypes         from "prop-types";
 import React             from "react";
-import registerPageStyle from "../../assets/jss/material-dashboard-pro-react/views/registerPageStyle";
-import Card              from "../../components/Card/Card.jsx";
-import CardBody          from "../../components/Card/CardBody.jsx";
-import Button            from "../../components/CustomButtons/Button.jsx";
-import CustomInput       from "../../components/CustomInput/CustomInput.jsx";
-import GridContainer     from "../../components/Grid/GridContainer.jsx";
-import GridItem          from "../../components/Grid/GridItem.jsx";
+import registerPageStyle from "assets/jss/material-dashboard-pro-react/views/registerPageStyle";
+import Card              from "components/Card/Card.jsx";
+import CardBody          from "components/Card/CardBody.jsx";
+import Button            from "components/CustomButtons/Button.jsx";
+import CustomInput       from "components/CustomInput/CustomInput.jsx";
+import GridContainer     from "components/Grid/GridContainer.jsx";
+import GridItem          from "components/Grid/GridItem.jsx";
 import {
    CabinetBuilderIcon,
    CreatorIcon,
    WoodWorkingIcon
-}                        from "../../components/Icons/CustomIcons";
-import InfoArea          from "../../components/InfoArea/InfoArea.jsx";
+}                        from "components/Icons/CustomIcons";
+import InfoArea          from "components/InfoArea/InfoArea.jsx";
 
 
 class RegisterPage extends React.Component
@@ -34,9 +34,9 @@ class RegisterPage extends React.Component
       };
 
       this.registerClick = this.registerClick.bind(this);
-      this.loginClick    = this.loginClick.bind(this);
-      this.typeClick     = this.typeClick.bind(this);
-      this.rangeClick    = this.rangeClick.bind(this);
+      // this.loginClick    = this.loginClick.bind(this);
+      // this.typeClick     = this.typeClick.bind(this);
+      // this.rangeClick    = this.rangeClick.bind(this);
       this.handleToggle  = this.handleToggle.bind(this);
    }
 
