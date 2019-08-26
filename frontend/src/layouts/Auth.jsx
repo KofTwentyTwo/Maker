@@ -1,33 +1,50 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Switch, Route, Redirect} from "react-router-dom";
-
 import withStyles from "@material-ui/core/styles/withStyles";
-
-import AuthNavbar from "../components/Navbars/AuthNavbar.jsx";
-import Footer from "../components/Footer/Footer.jsx";
-import routes from "../routes.js";
+import PropTypes  from "prop-types";
+import React      from "react";
+import {
+   Redirect,
+   Route,
+   Switch
+}                 from "react-router-dom";
+import registerBG from '../assets/img/woodworker-2-web.jpg';
+import loginBG    from '../assets/img/woodworker-2-web.jpg';
+import errorBG    from '../assets/img/woodworker-2-web.jpg';
 import pagesStyle from "../assets/jss/material-dashboard-pro-react/layouts/authStyle.jsx";
-
-import registerBG    from '../assets/img/woodworker-2-web.jpg';
-import loginBG       from "../assets/img/woodworker-2-web.jpg";
-import lockBG        from "../assets/img/woodworker-2-web.jpg";
-import errorBG       from "../assets/img/woodworker-2-web.jpg";
-import pricingBG     from "../assets/img/woodworker-2-web.jpg";
+import Footer     from "../components/Footer/Footer.jsx";
+import AuthNavbar from "../components/Navbars/AuthNavbar.jsx";
+import routes     from "../routes.js";
 
 
 class Pages extends React.Component
 {
    wrapper = React.createRef();
 
+
    componentDidMount()
    {
       document.body.style.overflow = "unset";
+
+      ///////////////////////////////////////////
+      // Set out Title Tag for the Application //
+      ///////////////////////////////////////////
+      document.title = "Makers4 - " + this.getActiveRoute(routes);
    }
+
+
+   async componentDidUpdate(e)
+   {
+      ///////////////////////////////////////////
+      // Set out Title Tag for the Application //
+      ///////////////////////////////////////////
+      document.title = "Makers4 - " + this.getActiveRoute(routes);
+   }
+
 
    getRoutes = routes =>
    {
+      ////////////////////////////////////////////////////////////////////////////////
       // Only return the routes that we care about that are part of the auth layout //
+      ////////////////////////////////////////////////////////////////////////////////
       return routes.map((prop, key) =>
       {
          if (prop.collapse)
@@ -47,12 +64,18 @@ class Pages extends React.Component
 
    getBgImage = () =>
    {
-      if (window.location.pathname.indexOf("/auth/signup")                 !== -1) {return registerBG;}
-      else if (window.location.pathname.indexOf("/auth/login")             !== -1) {return loginBG;}
-      else if (window.location.pathname.indexOf("/auth/okta-login")        !== -1) {return loginBG;}
-      else if (window.location.pathname.indexOf("/auth/pricing")           !== -1) {return pricingBG;}
-      else if (window.location.pathname.indexOf("/auth/lock-screen-page")  !== -1) {return lockBG;}
-      else if (window.location.pathname.indexOf("/auth/error-page")        !== -1) {return errorBG;}
+      if (window.location.pathname.indexOf("/auth/signup") !== -1)
+      {
+         return registerBG;
+      }
+      else if (window.location.pathname.indexOf("/auth/login") !== -1)
+      {
+         return loginBG;
+      }
+      else
+      {
+         return errorBG;
+      }
    };
 
    getActiveRoute = routes =>
@@ -80,6 +103,7 @@ class Pages extends React.Component
       return activeRoute;
    };
 
+
    render()
    {
       const {classes, ...rest} = this.props;
@@ -99,6 +123,7 @@ class Pages extends React.Component
       );
    }
 }
+
 
 Pages.propTypes = {
    classes: PropTypes.object.isRequired

@@ -22,8 +22,6 @@ import ValidationForms from "views/Forms/ValidationForms.jsx";
 import VectorMap from "views/Maps/VectorMap.jsx";
 import Widgets from "views/Widgets/Widgets.jsx";
 import Wizard from "views/Forms/Wizard.jsx";
-
-// @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import DateRange from "@material-ui/icons/DateRange";
@@ -33,6 +31,7 @@ import Place from "@material-ui/icons/Place";
 import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 import OktaLoginPage from "./views/Pages/OktaLoginPage";
+
 
 var dashRoutes = [
    {
@@ -48,23 +47,16 @@ var dashRoutes = [
       icon: Image,
       state: "pageCollapse",
       views: [
-         // {
-         //    path: "/pricing-page",
-         //    name: "Pricing",
-         //    mini: "PP",
-         //    component: PricingPage,
-         //    layout: "/auth"
-         // },
          {
             path: "/login",
-            name: "Makers4 / Login",
+            name: "Login",
             mini: "L",
             component: OktaLoginPage,
             layout: "/auth"
          },
          {
             path: "/signup",
-            name: "Makers4 / Sign Up",
+            name: "Signup",
             mini: "R",
             component: RegisterPage,
             layout: "/auth"
@@ -276,4 +268,6 @@ var dashRoutes = [
       layout: "/admin"
    }
 ];
+
 export default dashRoutes;
+

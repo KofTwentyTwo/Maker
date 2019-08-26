@@ -26,9 +26,7 @@ function onAuthRequired({auth, history})
 
 ReactDOM.render(
       <Router history={history}>
-
-         <Security issuer={config.issuer} client_id={config.client_id} redirect_uri={config.redirect_uri}
-                   onAuthRequired={onAuthRequired}>
+         <Security issuer={config.issuer} client_id={config.client_id} redirect_uri={config.redirect_uri} onAuthRequired={onAuthRequired}>
             <SecureRoute path="/admin" component={AdminLayout}/>
             <Route path="/auth" component={AuthLayout}/>
             <Route path='/implicit/callback' component={ImplicitCallback}/>
