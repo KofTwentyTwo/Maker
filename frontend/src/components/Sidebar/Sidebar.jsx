@@ -199,18 +199,18 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                         [" " + classes[color]]: this.activeRoute(prop.path)
                      });
 
-         const collapseItemMini    = classes.collapseItemMini;
-         const navLinkClasses      = classes.itemLink;
-         const itemIcon            = classes.itemIcon;
+         const collapseItemMini = classes.collapseItemMini;
+         const navLinkClasses   = classes.itemLink;
+         const itemIcon         = classes.itemIcon;
 
-         const itemText            =
+         const itemText         =
                      classes.itemText +
                      " " +
                      cx({
                         [classes.itemTextMini]:
                         this.props.miniActive && this.state.miniActive
                      });
-         const collapseItemText    =
+         const collapseItemText =
                      classes.collapseItemText +
                      " " +
                      cx({
@@ -268,9 +268,9 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                routes,
                bgColor,
                username,
-            }                = this.props;
+            } = this.props;
 
-      const itemText         =
+      const itemText =
                   classes.itemText +
                   " " +
                   cx({
@@ -296,7 +296,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
       const collapseItemMini = classes.collapseItemMini;
       const photo            = classes.photo;
 
-      var user               = (
+      var user = (
             <div className={userWrapperClass}>
 
                {/*Pull out the concept of an avatar for now - since we have no ability to pull one from */}
@@ -388,7 +388,7 @@ const authSidebar = withAuth(class Sidebar extends React.Component
             <List className={classes.list}>{this.createLinks(routes)}</List>
       );
 
-      const logoNormal     =
+      const logoNormal =
                   classes.logoNormal +
                   " " +
                   cx({
@@ -396,8 +396,8 @@ const authSidebar = withAuth(class Sidebar extends React.Component
                      this.props.miniActive && this.state.miniActive
                   });
 
-      const logoMini       = classes.logoMini ;
-      const logoClasses    = classes.logo ;
+      const logoMini    = classes.logoMini;
+      const logoClasses = classes.logo;
 
       var brand            = (
             <div className={logoClasses}>

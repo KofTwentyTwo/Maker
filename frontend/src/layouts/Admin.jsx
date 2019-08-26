@@ -266,6 +266,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
                         <Switch>
                            {this.getRoutes(routes)}
                            <Redirect from="/admin" to="/admin/projects"/>
+                           <Redirect from="/" to="/admin/projects"/>
                         </Switch>
                      </div>
                   </div>

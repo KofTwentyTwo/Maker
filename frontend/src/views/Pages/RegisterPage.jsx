@@ -1,32 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
-
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Icon from "@material-ui/core/Icon";
-
-// @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
-// import LockOutline from "@material-ui/icons/LockOutline";
-import Check from "@material-ui/icons/Check";
-
-// core components
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
-import InfoArea from "../../components/InfoArea/InfoArea.jsx";
-import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
-
+import Checkbox          from "@material-ui/core/Checkbox";
+import FormControlLabel  from "@material-ui/core/FormControlLabel";
+import Icon              from "@material-ui/core/Icon";
+import InputAdornment    from "@material-ui/core/InputAdornment";
+import withStyles        from "@material-ui/core/styles/withStyles";
+import Check             from "@material-ui/icons/Check";
+import Code              from "@material-ui/icons/Code";
+import Email             from "@material-ui/icons/Email";
+import Face              from "@material-ui/icons/Face";
+import Group             from "@material-ui/icons/Group";
+import Timeline          from "@material-ui/icons/Timeline";
+import PropTypes         from "prop-types";
+import React             from "react";
 import registerPageStyle from "../../assets/jss/material-dashboard-pro-react/views/registerPageStyle";
+import Card              from "../../components/Card/Card.jsx";
+import CardBody          from "../../components/Card/CardBody.jsx";
+import Button            from "../../components/CustomButtons/Button.jsx";
+import CustomInput       from "../../components/CustomInput/CustomInput.jsx";
+import GridContainer     from "../../components/Grid/GridContainer.jsx";
+import GridItem          from "../../components/Grid/GridItem.jsx";
+import InfoArea          from "../../components/InfoArea/InfoArea.jsx";
+
 
 class RegisterPage extends React.Component
 {
@@ -36,14 +29,16 @@ class RegisterPage extends React.Component
       this.state = {
          checked: []
       };
+
       this.handleToggle = this.handleToggle.bind(this);
    }
 
+
    handleToggle(value)
    {
-      const {checked} = this.state;
+      const {checked}    = this.state;
       const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
+      const newChecked   = [...checked];
 
       if (currentIndex === -1)
       {
@@ -58,6 +53,7 @@ class RegisterPage extends React.Component
          checked: newChecked
       });
    }
+
 
    render()
    {
@@ -92,19 +88,7 @@ class RegisterPage extends React.Component
                               </GridItem>
                               <GridItem xs={12} sm={8} md={5}>
                                  <div className={classes.center}>
-                                    <Button justIcon round color="twitter">
-                                       <i className="fab fa-twitter"/>
-                                    </Button>
-                                    {` `}
-                                    <Button justIcon round color="dribbble">
-                                       <i className="fab fa-dribbble"/>
-                                    </Button>
-                                    {` `}
-                                    <Button justIcon round color="facebook">
-                                       <i className="fab fa-facebook-f"/>
-                                    </Button>
-                                    {` `}
-                                    <h4 className={classes.socialTitle}>or be classical</h4>
+                                    <h4 className={classes.socialTitle}>Your New Account Details</h4>
                                  </div>
                                  <form className={classes.form}>
                                     <CustomInput
@@ -114,14 +98,11 @@ class RegisterPage extends React.Component
                                           }}
                                           inputProps={{
                                              startAdornment: (
-                                                   <InputAdornment
-                                                         position="start"
-                                                         className={classes.inputAdornment}
-                                                   >
-                                                      <Face className={classes.inputAdornmentIcon}/>
-                                                   </InputAdornment>
-                                             ),
-                                             placeholder: "First Name..."
+                                                                   <InputAdornment position="start" className={classes.inputAdornment}>
+                                                                      <Face className={classes.inputAdornmentIcon}/>
+                                                                   </InputAdornment>
+                                                             ),
+                                             placeholder:    "First Name..."
                                           }}
                                     />
                                     <CustomInput
@@ -131,14 +112,26 @@ class RegisterPage extends React.Component
                                           }}
                                           inputProps={{
                                              startAdornment: (
-                                                   <InputAdornment
-                                                         position="start"
-                                                         className={classes.inputAdornment}
-                                                   >
-                                                      <Email className={classes.inputAdornmentIcon}/>
-                                                   </InputAdornment>
-                                             ),
-                                             placeholder: "Email..."
+                                                                   <InputAdornment position="start" className={classes.inputAdornment}>
+                                                                      <Face className={classes.inputAdornmentIcon}/>
+                                                                   </InputAdornment>
+                                                             ),
+                                             placeholder:    "Last Name..."
+                                          }}
+                                    />
+
+                                    <CustomInput
+                                          formControlProps={{
+                                             fullWidth: true,
+                                             className: classes.customFormControlClasses
+                                          }}
+                                          inputProps={{
+                                             startAdornment: (
+                                                                   <InputAdornment position="start" className={classes.inputAdornment}>
+                                                                      <Email className={classes.inputAdornmentIcon}/>
+                                                                   </InputAdornment>
+                                                             ),
+                                             placeholder:    "Email..."
                                           }}
                                     />
                                     <CustomInput
@@ -148,21 +141,21 @@ class RegisterPage extends React.Component
                                           }}
                                           inputProps={{
                                              startAdornment: (
-                                                   <InputAdornment
-                                                         position="start"
-                                                         className={classes.inputAdornment}
-                                                   >
-                                                      <Icon className={classes.inputAdornmentIcon}>
-                                                         lock_outline
-                                                      </Icon>
-                                                   </InputAdornment>
-                                             ),
-                                             placeholder: "Password..."
+                                                                   <InputAdornment
+                                                                         position="start"
+                                                                         className={classes.inputAdornment}
+                                                                   >
+                                                                      <Icon className={classes.inputAdornmentIcon}>
+                                                                         lock_outline
+                                                                      </Icon>
+                                                                   </InputAdornment>
+                                                             ),
+                                             placeholder:    "Password..."
                                           }}
                                     />
                                     <FormControlLabel
                                           classes={{
-                                             root: classes.checkboxLabelControl,
+                                             root:  classes.checkboxLabelControl,
                                              label: classes.checkboxLabel
                                           }}
                                           control={
@@ -175,7 +168,7 @@ class RegisterPage extends React.Component
                                                    icon={<Check className={classes.uncheckedIcon}/>}
                                                    classes={{
                                                       checked: classes.checked,
-                                                      root: classes.checkRoot
+                                                      root:    classes.checkRoot
                                                    }}
                                              />
                                           }
@@ -202,6 +195,7 @@ class RegisterPage extends React.Component
       );
    }
 }
+
 
 RegisterPage.propTypes = {
    classes: PropTypes.object.isRequired

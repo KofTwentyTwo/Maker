@@ -1,12 +1,12 @@
-import React from "react";
-import {Redirect} from 'react-router-dom';
-import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
+import withStyles       from "@material-ui/core/styles/withStyles";
+import {withAuth}       from '@okta/okta-react';
+import PropTypes        from "prop-types";
+import React            from "react";
+import {Redirect}       from 'react-router-dom';
+import loginPageStyle   from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
+import GridContainer    from "../../components/Grid/GridContainer.jsx";
+import GridItem         from "../../components/Grid/GridItem.jsx";
 import OktaSignInWidget from '../../components/OKTA/OktaSignInWidget.jsx';
-import {withAuth} from '@okta/okta-react';
-import loginPageStyle from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
 
 
 const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
@@ -15,8 +15,8 @@ const authOktaLoginPage = withAuth(class OktaLoginPage extends React.Component
    {
       super(props);
       this.onSuccess = this.onSuccess.bind(this);
-      this.onError = this.onError.bind(this);
-      this.state =
+      this.onError   = this.onError.bind(this);
+      this.state     =
             {
                authenticated: null
             };
