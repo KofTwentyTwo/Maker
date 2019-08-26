@@ -23,7 +23,7 @@ import {
 import InfoArea          from "components/InfoArea/InfoArea.jsx";
 
 
-class RegisterPage extends React.Component
+class OktaRegisterPage extends React.Component
 {
    constructor(props)
    {
@@ -337,8 +337,8 @@ class RegisterPage extends React.Component
 }
 
 
-RegisterPage.propTypes = {
+OktaRegisterPage.propTypes = {
    classes: PropTypes.object.isRequired
 };
 
-export default withStyles(registerPageStyle)(RegisterPage);
+export default withStyles(registerPageStyle)(OktaRegisterPage);

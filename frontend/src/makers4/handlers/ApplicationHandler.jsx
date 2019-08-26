@@ -6,7 +6,7 @@ import FixedPlugin      from "components/FixedPlugin/FixedPlugin.jsx";
 import Footer           from "components/Footer/Footer.jsx";
 import AdminNavbar      from "components/Navbars/AdminNavbar.jsx";
 import Sidebar          from "components/Sidebar/Sidebar.jsx";
-import routes           from "makers4/routes.js";
+import {ApplicationRoutes as routes}           from "makers4/Makers4Routes";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import PropTypes        from "prop-types";
