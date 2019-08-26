@@ -4,11 +4,8 @@ import Icon              from "@material-ui/core/Icon";
 import InputAdornment    from "@material-ui/core/InputAdornment";
 import withStyles        from "@material-ui/core/styles/withStyles";
 import Check             from "@material-ui/icons/Check";
-import Code              from "@material-ui/icons/Code";
 import Email             from "@material-ui/icons/Email";
 import Face              from "@material-ui/icons/Face";
-import Group             from "@material-ui/icons/Group";
-import Timeline          from "@material-ui/icons/Timeline";
 import PropTypes         from "prop-types";
 import React             from "react";
 import registerPageStyle from "../../assets/jss/material-dashboard-pro-react/views/registerPageStyle";
@@ -18,6 +15,12 @@ import Button            from "../../components/CustomButtons/Button.jsx";
 import CustomInput       from "../../components/CustomInput/CustomInput.jsx";
 import GridContainer     from "../../components/Grid/GridContainer.jsx";
 import GridItem          from "../../components/Grid/GridItem.jsx";
+import {
+   CabinetBuilderIcon,
+   CreatorIcon,
+   Makers4Icon,
+   WoodWorkingIcon
+} from "../../components/Icons/CustomIcons";
 import InfoArea          from "../../components/InfoArea/InfoArea.jsx";
 
 
@@ -63,39 +66,42 @@ class RegisterPage extends React.Component
                <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={10}>
                      <Card className={classes.cardSignup}>
-                        <h2 className={classes.cardTitle}>Register</h2>
+                        <h2 className={classes.cardTitle}>Get Started Designing and Planing Today</h2>
+                        <h4 className={classes.cardTitle}>Always Free Software Made With ♡ for Woodworkers, Cabinet Builders, Creators, and Hobbyists.</h4>
                         <CardBody>
                            <GridContainer justify="center">
+
+
                               <GridItem xs={12} sm={12} md={5}>
                                  <InfoArea
-                                       title="Marketing"
-                                       description="We've created the marketing campaign of the website. It was a very interesting collaboration."
-                                       icon={Timeline}
+                                       title="Woodworkers"
+                                       description="Experimenting in woodworking software or cabinet design software is a lot less expensive than experimenting in the shop. Use Makers4 to visualize as many designs as you like without wasting a single piece of wood."
+                                       icon={WoodWorkingIcon}
                                        iconColor="rose"
                                  />
                                  <InfoArea
-                                       title="Fully Coded in HTML5"
-                                       description="We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub."
-                                       icon={Code}
+                                       title="Cabinet Builders"
+                                       description="Start with the exact cabinet template you need—not just a blank screen. Then simply stamp custom shapes for shelf units, hampers, drawers, and racks on your design. Move, delete, add, and stack units quickly and easily."
+                                       icon={CabinetBuilderIcon}
                                        iconColor="primary"
                                  />
                                  <InfoArea
-                                       title="Built Audience"
-                                       description="There is also a Fully Customizable CMS Admin Dashboard for this product."
-                                       icon={Group}
+                                       title="Creators and Hobbyists"
+                                       description="Start off with a complete set of 3D tools and 3 projects, craft, design, print, build, repeat, share, and release.   All with Makers4 - Always Free Software Made With ♡ for Woodworkers, Cabinet Builders, Creators, and Hobbyists.  "
+                                       icon={CreatorIcon}
                                        iconColor="info"
                                  />
                               </GridItem>
+
+
                               <GridItem xs={12} sm={8} md={5}>
                                  <div className={classes.center}>
                                     <h4 className={classes.socialTitle}>Your New Account Details</h4>
                                  </div>
+
                                  <form className={classes.form}>
                                     <CustomInput
-                                          formControlProps={{
-                                             fullWidth: true,
-                                             className: classes.customFormControlClasses
-                                          }}
+                                          formControlProps={{fullWidth: true, className: classes.customFormControlClasses}}
                                           inputProps={{
                                              startAdornment: (
                                                                    <InputAdornment position="start" className={classes.inputAdornment}>
@@ -106,10 +112,7 @@ class RegisterPage extends React.Component
                                           }}
                                     />
                                     <CustomInput
-                                          formControlProps={{
-                                             fullWidth: true,
-                                             className: classes.customFormControlClasses
-                                          }}
+                                          formControlProps={{fullWidth: true, className: classes.customFormControlClasses}}
                                           inputProps={{
                                              startAdornment: (
                                                                    <InputAdornment position="start" className={classes.inputAdornment}>
@@ -119,12 +122,8 @@ class RegisterPage extends React.Component
                                              placeholder:    "Last Name..."
                                           }}
                                     />
-
                                     <CustomInput
-                                          formControlProps={{
-                                             fullWidth: true,
-                                             className: classes.customFormControlClasses
-                                          }}
+                                          formControlProps={{fullWidth: true, className: classes.customFormControlClasses}}
                                           inputProps={{
                                              startAdornment: (
                                                                    <InputAdornment position="start" className={classes.inputAdornment}>
@@ -135,56 +134,39 @@ class RegisterPage extends React.Component
                                           }}
                                     />
                                     <CustomInput
-                                          formControlProps={{
-                                             fullWidth: true,
-                                             className: classes.customFormControlClasses
-                                          }}
+                                          formControlProps={{fullWidth: true, className: classes.customFormControlClasses}}
                                           inputProps={{
                                              startAdornment: (
-                                                                   <InputAdornment
-                                                                         position="start"
-                                                                         className={classes.inputAdornment}
-                                                                   >
-                                                                      <Icon className={classes.inputAdornmentIcon}>
-                                                                         lock_outline
-                                                                      </Icon>
+                                                                   <InputAdornment position="start" className={classes.inputAdornment}>
+                                                                      <Icon className={classes.inputAdornmentIcon}>lock_outline</Icon>
                                                                    </InputAdornment>
                                                              ),
                                              placeholder:    "Password..."
                                           }}
                                     />
                                     <FormControlLabel
-                                          classes={{
-                                             root:  classes.checkboxLabelControl,
-                                             label: classes.checkboxLabel
-                                          }}
+                                          classes={{root: classes.checkboxLabelControl, label: classes.checkboxLabel}}
                                           control={
                                              <Checkbox
                                                    tabIndex={-1}
                                                    onClick={() => this.handleToggle(1)}
-                                                   checkedIcon={
-                                                      <Check className={classes.checkedIcon}/>
-                                                   }
+                                                   checkedIcon={<Check className={classes.checkedIcon}/>}
                                                    icon={<Check className={classes.uncheckedIcon}/>}
-                                                   classes={{
-                                                      checked: classes.checked,
-                                                      root:    classes.checkRoot
-                                                   }}
+                                                   classes={{checked: classes.checked, root: classes.checkRoot}}
                                              />
                                           }
-                                          label={
-                                             <span>
-                            I agree to the{" "}
-                                                <a href="#pablo">terms and conditions</a>.
-                          </span>
-                                          }
+                                          label={<span>I agree to the{" "}<a target="_blank" rel="noopener noreferrer" href="https://www.makers4.com/terms">terms and conditions</a>.</span>}
                                     />
+
                                     <div className={classes.center}>
                                        <Button round color="primary">
                                           Get started
                                        </Button>
                                     </div>
+
                                  </form>
+
+
                               </GridItem>
                            </GridContainer>
                         </CardBody>
