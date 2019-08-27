@@ -1,7 +1,7 @@
 import withStyles      from "@material-ui/core/styles/withStyles";
-import errorPageStyles from "assets/jss/material-dashboard-pro-react/views/errorPageStyles.jsx";
-import GridContainer   from "components/Grid/GridContainer.jsx";
-import GridItem        from "components/Grid/GridItem.jsx";
+import errorPageStyles from "assets/jss/material-dashboard-pro-react/views/errorPageStyles";
+import GridContainer   from "components/Grid/GridContainer";
+import GridItem        from "components/Grid/GridItem";
 import PropTypes       from "prop-types";
 import React           from "react";
 
