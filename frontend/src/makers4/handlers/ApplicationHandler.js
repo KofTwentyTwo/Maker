@@ -3,15 +3,15 @@ import {withAuth}                    from '@okta/okta-react';
 import appStyle                      from "assets/jss/material-dashboard-pro-react/layouts/adminStyle";
 import cx                            from "classnames";
 import FixedPlugin                   from "components/FixedPlugin/FixedPlugin";
-import AdminNavbar                   from "makers4/components/Navbars/AdminNavbar";
-import Sidebar                       from "makers4/components/Sidebar/Sidebar";
 import logo                          from "makers4/assets/img/logo-white.svg";
 import pageImage                     from "makers4/assets/img/woodworker-web.jpg";
 import Footer                        from "makers4/components/Footer/Footer";
+import AdminNavbar                   from "makers4/components/Navbars/AdminNavbar";
+import Sidebar                       from "makers4/components/Sidebar/Sidebar";
 import {ApplicationRoutes as routes} from "makers4/Makers4Routes";
 import PerfectScrollbar              from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-import PropTypes                     from "prop-types";
+import PropTypes                     from 'prop-types';
 import React                         from "react";
 import {
    Redirect,
@@ -19,6 +19,8 @@ import {
    Switch
 }                                    from "react-router-dom";
 
+
+const notifications = [{ message: 'This is notificaiton Message 1' }, { message: 'and this is notification message 2' }];
 
 var ps;
 
@@ -31,15 +33,17 @@ const authDashboard = withAuth(class Dashboard extends React.Component
    {
       super(props);
       this.state = {
-         mobileOpen:   false,
-         miniActive:   false,
-         image:        pageImage,
-         color:        "blue",
-         bgColor:      "black",
-         hasImage:     true,
-         fixedClasses: "dropdown",
-         logo:         logo,
-         username:     null
+         mobileOpen:        false,
+         miniActive:        false,
+         image:             pageImage,
+         color:             "blue",
+         bgColor:           "black",
+         hasImage:          true,
+         fixedClasses:      "dropdown",
+         logo:              logo,
+         username:          null,
+         notifications:     notifications,
+         notificationCount: notifications.length
       };
 
       this.checkAuthentication = this.checkAuthentication.bind(this);
@@ -201,20 +205,21 @@ const authDashboard = withAuth(class Dashboard extends React.Component
    {
       return routes.map((prop, key) =>
       {
+         /////////////////////////////////////////////////////////////////////////////////
+         // Take into account that fact that this is also used for the hierarchy on the //
+         // sidebar - recur on ourselves as needed to get all possible routes           //
+         /////////////////////////////////////////////////////////////////////////////////
          if (prop.collapse)
          {
             return this.getRoutes(prop.views);
          }
 
+         ////////////////////////////////////////////////
+         // Only return possible routes defined for us //
+         ////////////////////////////////////////////////
          if (prop.layout === "/admin")
          {
-            return (
-                  <Route
-                        path={prop.layout + prop.path}
-                        component={prop.component}
-                        key={key}
-                  />
-            );
+            return (<Route path={prop.layout + prop.path} component={prop.component} key={key}/>);
          }
          else
          {
@@ -262,7 +267,7 @@ const authDashboard = withAuth(class Dashboard extends React.Component
             <div className={classes.wrapper}>
                <Sidebar username={this.state.username} routes={routes} logoText={"Makers4"} logo={this.state.logo} image={this.state.image} handleDrawerToggle={this.handleDrawerToggle} open={this.state.mobileOpen} color={this.state.color} bgColor={this.state.bgColor} miniActive={this.state.miniActive}{...rest}/>
                <div className={mainPanel} ref={this.mainPanel}>
-                  <AdminNavbar sidebarMinimize={this.sidebarMinimize.bind(this)} miniActive={this.state.miniActive} brandText={this.getActiveRoute(routes)} handleDrawerToggle={this.handleDrawerToggle} auth={this.props.auth}{...rest}/>
+                  <AdminNavbar sidebarMinimize={this.sidebarMinimize.bind(this)} miniActive={this.state.miniActive} brandText={this.getActiveRoute(routes)} handleDrawerToggle={this.handleDrawerToggle} auth={this.props.auth} notifications={notifications}{...rest}/>
                   <div className={classes.content}>
                      <div className={classes.container}>
                         <Switch>

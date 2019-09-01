@@ -17,17 +17,15 @@ const useStyles = makeStyles(styles);
 
 export default function AdminNavbar(props)
 {
-   const classes                             = useStyles();
-   const {color, rtlActive, brandText, auth} = props;
-   const appBarClasses                       = cx({
+   const classes                                 = useStyles();
+   const {color, brandText, auth, notifications} = props;
+
+   const appBarClasses = cx({
       [" " + classes[color]]: color
    });
-   const sidebarMinimize                     =
-               classes.sidebarMinimize +
-               " " +
-               cx({
-                  [classes.sidebarMinimizeRTL]: rtlActive
-               });
+
+   const sidebarMinimize = classes.sidebarMinimize;
+
    return (
          <AppBar className={classes.appBar + appBarClasses}>
             <Toolbar className={classes.container}>
@@ -61,7 +59,7 @@ export default function AdminNavbar(props)
                   </Button>
                </div>
                <Hidden smDown implementation="css">
-                  <AdminNavbarLinks rtlActive={rtlActive} auth={auth}/>
+                  <AdminNavbarLinks auth={auth} notifications={notifications}/>
                </Hidden>
                <Hidden mdUp implementation="css">
                   <Button
@@ -81,10 +79,10 @@ export default function AdminNavbar(props)
 
 AdminNavbar.propTypes = {
    color:              PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-   rtlActive:          PropTypes.bool,
    brandText:          PropTypes.string,
    miniActive:         PropTypes.bool,
    handleDrawerToggle: PropTypes.func,
    sidebarMinimize:    PropTypes.func,
+   notifications:      PropTypes.array,
    auth:               PropTypes.object
 };

@@ -17,6 +17,7 @@ import Button            from "components/CustomButtons/Button.js";
 import CustomInput       from "components/CustomInput/CustomInput.js";
 import PropTypes         from "prop-types";
 import React             from "react";
+import {Link}            from 'react-router-dom';
 
 
 const useStyles = makeStyles(styles);
@@ -26,10 +27,57 @@ export default function HeaderLinks(props)
    const [openNotification, setOpenNotification] = React.useState(null);
    const [openProfile, setOpenProfile]           = React.useState(null);
    const classes                                 = useStyles();
-   const {rtlActive, auth}                       = props;
-   const dropdownItem                            = classNames(classes.dropdownItem, classes.primaryHover, {[classes.dropdownItemRTL]: rtlActive});
-   const wrapper                                 = classNames({[classes.wrapperRTL]: rtlActive});
+   const {auth, notifications}                   = props;
+   const dropdownItem                            = classNames(classes.dropdownItem, classes.primaryHover);
+   const wrapper                                 = classNames();
    const managerClasses                          = classNames({[classes.managerClasses]: true});
+
+   const handleSearchClicked          = React.forwardRef((props, ref) => <Link innerRef={ref} to="/admin/search" {...props} />);
+   const handleDashboardClicked       = React.forwardRef((props, ref) => <Link innerRef={ref} to="/admin/projects" {...props} />);
+   const handleViewUserProfileClicked = React.forwardRef((props, ref) => <Link innerRef={ref} to="/admin/view-profile" {...props} />);
+   const handleViewSettingsClicked    = React.forwardRef((props, ref) => <Link innerRef={ref} to="/admin/view-settings" {...props} />);
+
+   const getNotificationCount = () =>
+   {
+      if (notifications && notifications.length)
+      {
+         return (
+               <span className={classes.notifications}>{notifications.length}</span>
+         );
+      }
+      else
+      {
+         return null;
+      }
+   }
+
+   const getNotificationsMenu = () =>
+   {
+      if (notifications && notifications.length)
+      {
+         return (
+               <Popper open={Boolean(openNotification)} anchorEl={openNotification} transition disablePortal placement="bottom" className={classNames({[classes.popperClose]: !openNotification, [classes.popperResponsive]: true, [classes.popperNav]: true})}>
+                  {({TransitionProps}) => (
+                        <Grow{...TransitionProps} id="notification-menu-list" style={{transformOrigin: "0 0 0"}}>
+                           <Paper className={classes.dropdown}>
+                              <ClickAwayListener onClickAway={handleCloseNotification}>
+                                 <MenuList role="menu">
+                                       {
+                                          notifications.map(n => <MenuItem onClick={handleCloseNotification} className={dropdownItem}>{n.message}</MenuItem>)
+                                       }
+                                 </MenuList>
+                              </ClickAwayListener>
+                           </Paper>
+                        </Grow>
+                  )}
+               </Popper>
+         );
+      }
+      else
+      {
+         return null;
+      }
+   }
 
    const handleClickNotification = event =>
    {
@@ -61,169 +109,84 @@ export default function HeaderLinks(props)
       }
    };
 
-
    const handleCloseProfile = () =>
    {
       setOpenProfile(null);
    };
-
 
    const handleLogOut = () =>
    {
       auth.logout();
    };
 
-
-   const searchButton =
-               classes.top +
-               " " +
-               classes.searchButton +
-               " " +
-               classNames({
-                  [classes.searchRTL]: rtlActive
-               });
-
+   const searchButton = classes.top + " " + classes.searchButton;
+   ;
 
    return (
          <div className={wrapper}>
+
+            {/*////////////*/}
+            {/*// Search //*/}
+            {/*////////////*/}
             <CustomInput
-                  rtlActive={rtlActive}
                   formControlProps={{
                      className: classes.top + " " + classes.search
                   }}
                   inputProps={{
-                     placeholder: rtlActive ? "بحث" : "Search",
+                     placeholder: "Search",
                      inputProps:  {
-                        "aria-label": rtlActive ? "بحث" : "Search",
+                        "aria-label": "Search",
                         className:    classes.searchInput
                      }
                   }}
             />
-            <Button
-                  color="white"
-                  aria-label="edit"
-                  justIcon
-                  round
-                  className={searchButton}
-            >
+            <Button color="white" aria-label="edit" justIcon round className={searchButton} component={handleSearchClicked}>
                <Search className={classes.headerLinksSvg + " " + classes.searchIcon}/>
             </Button>
-            <Button
-                  color="transparent"
-                  simple
-                  aria-label="Dashboard"
-                  justIcon
-                  className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-                  muiClasses={{
-                     label: rtlActive ? classes.labelRTL : ""
-                  }}
-            >
-               <Dashboard
-                     className={
-                        classes.headerLinksSvg +
-                        " " +
-                        (rtlActive ? classes.links + " " + classes.linksRTL : classes.links)
-                     }
-               />
+
+            {/*/////////////////////////////*/}
+            {/*// Dashboard / My Projects //*/}
+            {/*/////////////////////////////*/}
+            <Button color="transparent" simple aria-label="Dashboard" justIcon className={classes.buttonLink} muiClasses={{label: ""}} component={handleDashboardClicked}>
+               <Dashboard className={classes.headerLinksSvg + " " + classes.links}/>
                <Hidden mdUp implementation="css">
-          <span className={classes.linkText}>
-            {rtlActive ? "لوحة القيادة" : "Dashboard"}
-          </span>
+                  <span className={classes.linkText}>Dashboard</span>
                </Hidden>
             </Button>
+
+            {/*///////////////////*/}
+            {/*// Notifications //*/}
+            {/*///////////////////*/}
             <div className={managerClasses}>
-               <Button
-                     color="transparent"
-                     justIcon
-                     aria-label="Notifications"
-                     aria-owns={openNotification ? "notification-menu-list" : null}
-                     aria-haspopup="true"
-                     onClick={handleClickNotification}
-                     className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-                     muiClasses={{
-                        label: rtlActive ? classes.labelRTL : ""
-                     }}
-               >
-                  <Notifications
-                        className={
-                           classes.headerLinksSvg +
-                           " " +
-                           (rtlActive
-                                 ? classes.links + " " + classes.linksRTL
-                                 : classes.links)
-                        }
-                  />
-                  <span className={classes.notifications}>5</span>
+
+               <Button color="transparent" justIcon aria-label="Notifications" aria-owns={openNotification ? "notification-menu-list" : null} aria-haspopup="true" onClick={handleClickNotification} className={classes.buttonLink} muiClasses={{label: ""}}>
+                  <Notifications className={classes.headerLinksSvg + " " + classes.links}/>
+
+                  {/*//////////////////////////////////////////////////////////////*/}
+                  {/*// Render out the pill count of notificaiton if we have any //*/}
+                  {/*//////////////////////////////////////////////////////////////*/}
+                  {getNotificationCount()}
+
                   <Hidden mdUp implementation="css">
-            <span
-                  onClick={handleClickNotification}
-                  className={classes.linkText}
-            >
-              {rtlActive ? "إعلام" : "Notification"}
-            </span>
+                     <span onClick={handleClickNotification} className={classes.linkText}>Notification</span>
                   </Hidden>
                </Button>
-               <Popper
-                     open={Boolean(openNotification)}
-                     anchorEl={openNotification}
-                     transition
-                     disablePortal
-                     placement="bottom"
-                     className={classNames({
-                        [classes.popperClose]:      !openNotification,
-                        [classes.popperResponsive]: true,
-                        [classes.popperNav]:        true
-                     })}
-               >
-                  {({TransitionProps}) => (
-                        <Grow
-                              {...TransitionProps}
-                              id="notification-menu-list"
-                              style={{transformOrigin: "0 0 0"}}
-                        >
-                           <Paper className={classes.dropdown}>
-                              <ClickAwayListener onClickAway={handleCloseNotification}>
-                                 <MenuList role="menu">
-                                    <MenuItem
-                                          onClick={handleCloseNotification}
-                                          className={dropdownItem}
-                                    >
-                                       {rtlActive ? "قد فاتّبع" : "Another One"}
-                                    </MenuItem>
-                                 </MenuList>
-                              </ClickAwayListener>
-                           </Paper>
-                        </Grow>
-                  )}
-               </Popper>
+
+               {/*////////////////////////////////////////////////////////////////*/}
+               {/*// Render out the popup menu for notifications if we have any //*/}
+               {/*////////////////////////////////////////////////////////////////*/}
+               {getNotificationsMenu()}
+
             </div>
 
+            {/*/////////////*/}
+            {/*// Profile //*/}
+            {/*/////////////*/}
             <div className={managerClasses}>
-               <Button
-                     color="transparent"
-                     aria-label="Person"
-                     justIcon
-                     aria-owns={openProfile ? "profile-menu-list" : null}
-                     aria-haspopup="true"
-                     onClick={handleClickProfile}
-                     className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-                     muiClasses={{
-                        label: rtlActive ? classes.labelRTL : ""
-                     }}
-               >
-                  <Person
-                        className={
-                           classes.headerLinksSvg +
-                           " " +
-                           (rtlActive
-                                 ? classes.links + " " + classes.linksRTL
-                                 : classes.links)
-                        }
-                  />
+               <Button color="transparent" aria-label="Person" justIcon aria-owns={openProfile ? "profile-menu-list" : null} aria-haspopup="true" onClick={handleClickProfile} className={classes.buttonLink} muiClasses={{label: ""}}>
+                  <Person className={classes.headerLinksSvg + " " + classes.links}/>
                   <Hidden mdUp implementation="css">
-            <span onClick={handleClickProfile} className={classes.linkText}>
-              {rtlActive ? "الملف الشخصي" : "Profile"}
-            </span>
+                     <span onClick={handleClickProfile} className={classes.linkText}>Profile</span>
                   </Hidden>
                </Button>
                <Popper
@@ -247,25 +210,10 @@ export default function HeaderLinks(props)
                            <Paper className={classes.dropdown}>
                               <ClickAwayListener onClickAway={handleCloseProfile}>
                                  <MenuList role="menu">
-                                    <MenuItem
-                                          onClick={handleCloseProfile}
-                                          className={dropdownItem}
-                                    >
-                                       {rtlActive ? "الملف الشخصي" : "Profile"}
-                                    </MenuItem>
-                                    <MenuItem
-                                          onClick={handleCloseProfile}
-                                          className={dropdownItem}
-                                    >
-                                       {rtlActive ? "الإعدادات" : "Settings"}
-                                    </MenuItem>
+                                    <MenuItem onClick={handleCloseProfile} className={dropdownItem} component={handleViewUserProfileClicked}>Profile</MenuItem>
+                                    <MenuItem onClick={handleCloseProfile} className={dropdownItem} component={handleViewSettingsClicked}>Settings</MenuItem>
                                     <Divider light/>
-                                    <MenuItem
-                                          onClick={handleLogOut}
-                                          className={dropdownItem}
-                                    >
-                                       {rtlActive ? "الخروج" : "Log out"}
-                                    </MenuItem>
+                                    <MenuItem onClick={handleLogOut} className={dropdownItem}>Log out</MenuItem>
                                  </MenuList>
                               </ClickAwayListener>
                            </Paper>
@@ -278,6 +226,7 @@ export default function HeaderLinks(props)
 }
 
 HeaderLinks.propTypes = {
-   rtlActive: PropTypes.bool,
-   auth:      PropTypes.object
+   auth:          PropTypes.object,
+   notifications: PropTypes.array
 };
+
