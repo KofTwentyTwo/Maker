@@ -381,21 +381,14 @@ class Sidebar extends React.Component
                         <List className={classes.list + " " + classes.collapseList}>
 
                            <ListItem className={classes.collapseItem}>
-                              <NavLink to="#" className={classes.itemLink + " " + classes.userCollapseLinks}>
+                              <NavLink to="/admin/view-profile" className={classes.itemLink + " " + classes.userCollapseLinks}>
                                  <span className={collapseItemMini}>MP</span>
                                  <ListItemText primary={"My Profile"} disableTypography={true} className={collapseItemText}/>
                               </NavLink>
                            </ListItem>
 
                            <ListItem className={classes.collapseItem}>
-                              <NavLink to="#" className={classes.itemLink + " " + classes.userCollapseLinks}>
-                                 <span className={collapseItemMini}>EP</span>
-                                 <ListItemText primary={"Edit Profile"} disableTypography={true} className={collapseItemText}/>
-                              </NavLink>
-                           </ListItem>
-
-                           <ListItem className={classes.collapseItem}>
-                              <NavLink to="#" className={classes.itemLink + " " + classes.userCollapseLinks}>
+                              <NavLink to="/admin/view-settings" className={classes.itemLink + " " + classes.userCollapseLinks}>
                                  <span className={collapseItemMini}>S</span>
                                  <ListItemText primary="Settings" disableTypography={true} className={collapseItemText}/>
                               </NavLink>
